@@ -19,10 +19,12 @@ namespace FreeCycle2.Controllers
                 ViewBag.a = "Please enter a search item..";
             }
             List<Item> items = new List<Item>();
-            using (SqlConnection conn = new SqlConnection("Server=.; Database=FreeCycleDB2; Integrated Security=true"))
+            using (SqlConnection conn = new SqlConnection("Server=.; Database=FreeCycleDatabase; Integrated Security=true"))
             {
                 conn.Open();
-                string sql = @"select * from items where item_title like '%" + search + "%'";
+                string sql = @"SELECT items.item_id,items.create_date,items.item_title,items.item_detail, images.image
+                                from items 
+                                inner join images on items.item_id = images.item_id where items.item_title like '%" + search + "%' or items.item_detail like '%" + search + "%' ";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
