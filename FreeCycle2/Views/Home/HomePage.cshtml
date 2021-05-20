@@ -13,21 +13,21 @@
     @:<div class="container">
         <div class="row">
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/Home/Item?categoryID=1" class="thumbnail">
                     <img src="~/Images/office_furniture_img.jfif" alt="Office Supplies" />
                 </a>
                 @Html.DisplayFor(m => m.Categs.Items[0].Category_name)
             </div>
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/Home/Item?categoryID=2" class="thumbnail">
                     <img src="~/Images/office_supplies_img.jfif" alt="Office Supplies" />
                 </a>
                 @Html.DisplayFor(m => m.Categs.Items[1].Category_name)
             </div>
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/Home/Item?categoryID=3" class="thumbnail">
                     <img src="~/Images/tech_equipment_img.jpg" alt="Office Supplies" />
                 </a>
@@ -35,7 +35,7 @@
             </div>
 
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/Home/Item?categoryID=4" class="thumbnail">
                     <img src="~/Images/other_img.jfif" alt="Office Supplies" />
                 </a>
@@ -59,7 +59,7 @@
     @:<div class="container">
         <div class="row">
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
 
 
                 <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 1].Item_Id ; return false" class="thumbnail">
@@ -78,7 +78,7 @@
                 @Html.DisplayFor(f => f.ItemsModel.Items[i - 1].Item_Title)
             </div>
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 2].Item_Id ; return false" class="thumbnail">
                     @{ int ad2_id = Model.ItemsModel.Items[i - 2].Item_Id;
                         int ad2_img_index = 0;
@@ -95,7 +95,7 @@
                 @Html.DisplayFor(f => f.ItemsModel.Items[i - 2].Item_Title)
             </div>
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 3].Item_Id ; return false" class="thumbnail">
                     @{ int ad3_id = Model.ItemsModel.Items[i - 3].Item_Id;
                         int ad3_img_index = 0;
@@ -114,7 +114,7 @@
             </div>
 
 
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="text-align:center">
                 <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 4].Item_Id ; return false" class="thumbnail">
                     @{ int ad4_id = Model.ItemsModel.Items[i - 4].Item_Id;
                         int ad4_img_index = 0;
