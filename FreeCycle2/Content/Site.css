@@ -22,3 +22,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.col-sm-4 .image-container {
+    border: solid;
+}
+
+.col-sm-3 .title-container {
+    border: solid;
+    background-color: black;
+}

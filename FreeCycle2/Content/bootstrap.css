@@ -121,6 +121,8 @@ textarea {
   font: inherit;
   margin: 0;
 }
+
+
 button {
   overflow: visible;
 }
@@ -1884,6 +1886,17 @@ pre code {
   .col-sm-3 {
     width: 25%;
   }
+
+    .col-sm-4 .image-container {
+        border:solid;
+    }
+
+    .col-sm-3 .title-container {
+        border: solid;
+        background-color: black;
+    }
+
+
   .col-sm-2 {
     width: 16.66666667%;
   }
@@ -6839,4 +6852,7 @@ button.close {
     display: none !important;
   }
 }
+
+
+
 /*# sourceMappingURL=bootstrap.css.map */
