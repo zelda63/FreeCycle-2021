@@ -13,11 +13,11 @@ namespace FreeCycle2.Controllers
 
         {
             User user = null;
-            
-            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
+
+            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDB2; Integrated Security=true")))
             {
                 conn.Open();
-                string sql = @"SELECT user_id, email, password, firstname, lastname from [User] WHERE email = '" + email + "'";
+                string sql = @"SELECT user_id, email, group_id, login_pwd_encry, first_name, last_name from user_account WHERE email = '" + email + "'";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -26,13 +26,17 @@ namespace FreeCycle2.Controllers
                     {
                         user_id = (int)reader["user_id"],
                         email = (string)reader["email"],
-                        password = (string)reader["password"],
-                        firstname = (string)reader["firstname"],
-                        lastname = (string)reader["lastname"]
+                        group_id = (int)reader["group_id"],
+                        login_pwd_encry = (string)reader["login_pwd_encry"],
+                        first_name = (string)reader["first_name"],
+                        last_name = (string)reader["last_name"]
                     };
                 }
             }
             return user;
         }
+
+
+
     }
 }
