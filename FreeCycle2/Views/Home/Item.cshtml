@@ -146,8 +146,20 @@
                                 <div class="container">
                                     <div class="row">
 
-                                        <div class="col-sm-12"> <a href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})"><img src="@img" width="150px" height="150px" style="border:solid" /> <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div><div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div><div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div></a></div>
+                                        <div class="col-sm-12">
+                                            <a href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                                <div class="row" style="border:solid;border-radius:5px; border-color:lightgray">
+                                                    <div class="col-md-4" style="margin-left:0">  <img src="@img" width="150px" height="150px" /> </div>
 
+                                                    <div class="col-md-8">
+                                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
+
+                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
+                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 

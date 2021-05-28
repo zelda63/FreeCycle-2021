@@ -13,10 +13,12 @@ namespace FreeCycle2.Models
 
         public string email { get; set; }
 
-   
-        public string password { get; set; }
 
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string login_pwd_encry { get; set; }
+
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+
+        public int group_id { get; set; }
     }
 }

@@ -9,7 +9,7 @@
     <div class="row">
 
 
-        <div class="col-lg-6">
+        <div class="col-lg-12" align="center">
 
 
             @{ if ((List<Item>)ViewData["itemlist45"] != null)
@@ -25,30 +25,39 @@
 
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-lg-12" style="background-color: grey">
                                     <div style="font-family: Helvetica, Sans-Serif;font-size: 36pt;">@product.item_title</div>
                                 </div>
                             </div>
-                            <div class="row">
-
-
-                                <div class="col-sm-12">
-                                    <img src="@img" width="300px" height="300px" style="border:solid" /> 
+                            <div class="row" style=" height: 400px; background-color: lightgray">
+                                <br /><br />
+                                <div class="col-lg-6">
+                                    <img src="@img" width="350px" height="300px" style="border:solid" />
                                 </div>
+                                <div class="col-lg-6">
+                                    <br /><br />
+                                    <div style="font-family: Arial;font-size: 26pt; font-weight:bold">Contact Information</div>
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 24pt;">@product.first_name @product.last_name</div>
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 20pt;">@product.email</div>
+                                    <button class="btn btn-default " type="submit">Contact</button>
 
+                                </div>
+                                <br /><br />
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
+                            <div class="row" align="left" style="background-color: lightslategrey">
+                                <div class="col-lg-12">
                                     <div style=" font-family:  Times New Roman, Times, serif; font-size: 20pt;">@product.item_detail</div>
-                                    <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
-                                </div></div>
+
                                 </div>
 
-                                }
+
+                                <br /><br /><br /><br /><br /><br /><div align="left" style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                            </div>
+                        </div>   }
 
                                 } }
 
-                            </div> <div class="col-lg-6"></div>
+                            </div> 
                         </div>
 </div>
 

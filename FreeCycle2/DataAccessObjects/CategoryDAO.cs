@@ -5,6 +5,7 @@ using System.Web;
 using FreeCycle2.Models;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Web.Mvc;
 
 namespace FreeCycle2.DataAccessObjects
 {
@@ -32,12 +33,96 @@ namespace FreeCycle2.DataAccessObjects
 
                     };
                     categories.Add(p);
+
+
+
                 }
+                Category c = new Category();
+                c.allCategories = categories;
             }
             return categories;
         }
 
+        public Category FCategory2()
+        {
+            List<Category> categories = new List<Category>();
+            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
+            {
+                conn.Open();
+                string sql = @"SELECT category_id,category_name from Category";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Category p = new Category()
+                    {
+                        Category_Id = (int)reader["category_id"],
+                        Category_name = (string)reader["category_name"]
 
+                    };
+                    categories.Add(p);
+
+
+
+                }
+                Category c = new Category();
+                c.allCategories = categories;
+                return c;
+            }
+          
+        }
+        public void updateMovie2(Category movie)
+        {
+            //This method accepts updates with, or without, a description
+            SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+
+
+            cmd.CommandText = @"UPDATE category SET category_name=@category_name where category_Id=@category_Id";
+            cmd.Parameters.AddWithValue("@category_name", movie.Category_name);
+            cmd.Parameters.AddWithValue("@category_id", movie.Category_Id);
+            con.Open();
+            cmd.ExecuteNonQuery();
+        }
+        public void deleteMovie2(int id)
+        {
+            SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"Declare @var As int; Select @var = items.item_id from items where category_id = @category_Id;Delete from images where images.item_id = @var;Delete from exchanges where exchanges.item_id = @var; Delete from items where category_id= @category_Id; Delete from category where category_id=@category_Id;";
+            cmd.Parameters.AddWithValue("@category_Id", id);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public int setMovieToEditMode2(List<Category> movies, int id)
+        {
+            int editIndex = 0;
+            foreach (Category m in movies)
+            {
+                if (m.Category_Id == id)
+                {
+                    m.IsEditable = true;
+                    return editIndex;
+                }
+                editIndex++;
+            }
+            return -1;
+        }
+
+        public void InsertMovie(Category movie)
+        {
+            SqlConnection con = new SqlConnection(conString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO category(category_name) VALUES ( @category_name)";
+            cmd.Parameters.AddWithValue("@category_name", movie.Category_name);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
 
 
         public Categs getAllCategories()

@@ -1,0 +1,44 @@
+﻿@model FreeCycle2.Models.Category
+@{
+    ViewBag.Title = "EditCategory";
+}
+
+<h2>Edit Category</h2>
+
+@using (Html.BeginForm("EditCategory", "Home", FormMethod.Post))
+{
+    var i = 0;
+    @Html.HiddenFor(m => m.EditIndex)
+    <style>
+        table, tr, td {
+            border: solid;
+            padding: 10px;
+        }
+    </style>
+    <table>
+        @for (i = 0; i < Model.allCategories.Count(); i++)
+        {
+            if (!Model.allCategories[i].IsEditable)
+            {
+
+
+                <tr>
+                    <td style="border:none">@Html.HiddenFor(m => m.allCategories[i].Category_Id)</td>
+                    <td>@Html.DisplayFor(m => m.allCategories[i].Category_name)</td>
+                    <td>@Html.ActionLink("Edit", "MoviesEdits", new { id = Model.allCategories[i].Category_Id })</td>
+                    <td>@Html.ActionLink("Delete", "MoviesDeleted", new { Id = Model.allCategories[i].Category_Id })</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+
+                    <td>@Html.HiddenFor(m => m.allCategories[i].Category_Id)</td>
+                    <td>@Html.TextBoxFor(m => m.allCategories[i].Category_name)</td>
+                    <td> <input type="submit" value="Save" name="Save" class="btn btn-link" /></td>
+                    <td> <input type="submit" value="Cancel" name="Cancel" class="btn btn-link" /></td>
+                </tr>
+            }
+        }
+    </table>
+}
