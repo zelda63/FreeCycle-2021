@@ -5,45 +5,64 @@
 
 }
 <h1>Categories</h1>
+
+
 @using (Html.BeginForm("AllCategories", "Home", FormMethod.Post))
 {
-    var i = 0;
-    @Html.HiddenFor(m => m.EditIndex)
+    var i = Model.Categs.Items.Count();
 
-    @:<div class="container">
-        <div class="row">
-
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/Home/Item?categoryID=1" class="thumbnail">
-                    <img src="~/Images/office_furniture_img.jfif" alt="Office Supplies" />
-                </a>
-                @Html.DisplayFor(m => m.Categs.Items[0].Category_name)
-            </div>
-
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/Home/Item?categoryID=2" class="thumbnail">
-                    <img src="~/Images/office_supplies_img.jfif" alt="Office Supplies" />
-                </a>
-                @Html.DisplayFor(m => m.Categs.Items[1].Category_name)
-            </div>
-
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/Home/Item?categoryID=3" class="thumbnail">
-                    <img src="~/Images/tech_equipment_img.jpg" alt="Office Supplies" />
-                </a>
-                @Html.DisplayFor(m => m.Categs.Items[2].Category_name)
-            </div>
+    if (i >= 4)
+    {
+        @Html.HiddenFor(m => m.EditIndex)
+        <style>
 
 
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/Home/Item?categoryID=4" class="thumbnail">
-                    <img src="~/Images/other_img.jfif" alt="Office Supplies" />
-                </a>
-                @Html.DisplayFor(m => m.Categs.Items[3].Category_name)
-            </div>
+            .slanted {
+                font-size: 40px;
+                text-transform: uppercase;
+                transform: rotate(-5deg) skew(-5deg);
+                background-color: #ffc;
+            }
+        </style>
 
-        </div>
-    @:</div>
+        @:<div class="container">
+            <div class="row">
+
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/Home/Item?categoryID=1" class="thumbnail">
+                        <img src="~/Images/office_furniture_img.jfif" alt="Office Supplies" />
+                    </a>
+                    @Html.DisplayFor(m => m.Categs.Items[i - 4].Category_name)
+                </div>
+
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/Home/Item?categoryID=2" class="thumbnail">
+                        <img src="~/Images/office_supplies_img.jfif" alt="Office Supplies" />
+                    </a>
+                    @Html.DisplayFor(m => m.Categs.Items[i - 3].Category_name)
+                </div>
+
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/Home/Item?categoryID=3" class="thumbnail">
+                        <img src="~/Images/tech_equipment_img.jpg" alt="Office Supplies" />
+                    </a>
+                    @Html.DisplayFor(m => m.Categs.Items[i - 2].Category_name)
+                </div>
+
+
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/Home/Item?categoryID=4" class="thumbnail">
+                        <img src="~/Images/other_img.jfif" alt="Office Supplies" />
+                    </a>
+                    @Html.DisplayFor(m => m.Categs.Items[i - 1].Category_name)
+                </div>
+
+            </div>@:</div>
+    }
+    else
+    {
+        <h1 style="height: 20vh; display: flex; flex-direction: column; justify-content: center; text-align: center;" class="slanted">Not Enough Categories to Display</h1>
+    }
 }
 
 
@@ -51,88 +70,97 @@
 
 <h1>Latest Ads</h1>
 @using (Html.BeginForm("AllItems", "Home", FormMethod.Post))
+
+
 {
+
+
     var i = Model.ItemsModel.Items.Count();
+    if (i >= 4)
+    {
+        @Html.HiddenFor(f => f.EditIndex)
 
-    @Html.HiddenFor(f => f.EditIndex)
+        @:<div class="container">
+            <div class="row">
 
-    @:<div class="container">
-        <div class="row">
-
-            <div class="col-xs-3" style="text-align:center">
+                <div class="col-xs-3" style="text-align:center">
 
 
-                <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 1].Item_Id ; return false" class="thumbnail">
-                    @{ int ad1_id = Model.ItemsModel.Items[i - 1].Item_Id;
-                        int ad1_img_index = 0;
-                        for (int j = 0; j < Model.Images.Items.Count; j++)
-                        {
-                            if (Model.Images.Items[j].Item_Id == ad1_id)
+                    <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 1].Item_Id ; return false" class="thumbnail">
+                        @{ int ad1_id = Model.ItemsModel.Items[i - 1].Item_Id;
+                            int ad1_img_index = 0;
+                            for (int j = 0; j < Model.Images.Items.Count; j++)
                             {
-                                ad1_img_index = j;
+                                if (Model.Images.Items[j].Item_Id == ad1_id)
+                                {
+                                    ad1_img_index = j;
+                                }
                             }
                         }
-                    }
-                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad1_img_index].Image_Data))">
-                </a>
-                @Html.DisplayFor(f => f.ItemsModel.Items[i - 1].Item_Title)
-            </div>
+                        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad1_img_index].Image_Data))">
+                    </a>
+                    @Html.DisplayFor(f => f.ItemsModel.Items[i - 1].Item_Title)
+                </div>
 
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 2].Item_Id ; return false" class="thumbnail">
-                    @{ int ad2_id = Model.ItemsModel.Items[i - 2].Item_Id;
-                        int ad2_img_index = 0;
-                        for (int j = 0; j < Model.Images.Items.Count; j++)
-                        {
-                            if (Model.Images.Items[j].Item_Id == ad2_id)
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 2].Item_Id ; return false" class="thumbnail">
+                        @{ int ad2_id = Model.ItemsModel.Items[i - 2].Item_Id;
+                            int ad2_img_index = 0;
+                            for (int j = 0; j < Model.Images.Items.Count; j++)
                             {
-                                ad2_img_index = j;
+                                if (Model.Images.Items[j].Item_Id == ad2_id)
+                                {
+                                    ad2_img_index = j;
+                                }
                             }
                         }
-                    }
-                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad2_img_index].Image_Data))">
-                </a>
-                @Html.DisplayFor(f => f.ItemsModel.Items[i - 2].Item_Title)
-            </div>
+                        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad2_img_index].Image_Data))">
+                    </a>
+                    @Html.DisplayFor(f => f.ItemsModel.Items[i - 2].Item_Title)
+                </div>
 
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 3].Item_Id ; return false" class="thumbnail">
-                    @{ int ad3_id = Model.ItemsModel.Items[i - 3].Item_Id;
-                        int ad3_img_index = 0;
-                        for (int j = 0; j < Model.Images.Items.Count; j++)
-                        {
-                            if (Model.Images.Items[j].Item_Id == ad3_id)
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 3].Item_Id ; return false" class="thumbnail">
+                        @{ int ad3_id = Model.ItemsModel.Items[i - 3].Item_Id;
+                            int ad3_img_index = 0;
+                            for (int j = 0; j < Model.Images.Items.Count; j++)
                             {
-                                ad3_img_index = j;
+                                if (Model.Images.Items[j].Item_Id == ad3_id)
+                                {
+                                    ad3_img_index = j;
+                                }
                             }
                         }
-                    }
-                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad3_img_index].Image_Data))">
-                </a>
-                @Html.DisplayFor(f => f.ItemsModel.Items[i - 3].Item_Title)
+                        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad3_img_index].Image_Data))">
+                    </a>
+                    @Html.DisplayFor(f => f.ItemsModel.Items[i - 3].Item_Title)
 
-            </div>
+                </div>
 
 
-            <div class="col-xs-3" style="text-align:center">
-                <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 4].Item_Id ; return false" class="thumbnail">
-                    @{ int ad4_id = Model.ItemsModel.Items[i - 4].Item_Id;
-                        int ad4_img_index = 0;
-                        for (int j = 0; j < Model.Images.Items.Count; j++)
-                        {
-                            if (Model.Images.Items[j].Item_Id == ad4_id)
+                <div class="col-xs-3" style="text-align:center">
+                    <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 4].Item_Id ; return false" class="thumbnail">
+                        @{ int ad4_id = Model.ItemsModel.Items[i - 4].Item_Id;
+                            int ad4_img_index = 0;
+                            for (int j = 0; j < Model.Images.Items.Count; j++)
                             {
-                                ad4_img_index = j;
+                                if (Model.Images.Items[j].Item_Id == ad4_id)
+                                {
+                                    ad4_img_index = j;
+                                }
                             }
                         }
-                    }
-                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad4_img_index].Image_Data))">
-                </a>
-                @Html.DisplayFor(f => f.ItemsModel.Items[i - 4].Item_Title)
-            </div>
+                        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad4_img_index].Image_Data))">
+                    </a>
+                    @Html.DisplayFor(f => f.ItemsModel.Items[i - 4].Item_Title)
+                </div>
 
-        </div>
-    @:</div>
+            </div>@:</div>
+    }
+    else
+    {
+        <h1 style="height: 20vh; display: flex; flex-direction: column; justify-content: center; text-align: center;" class="slanted">Not Enough Items to Display</h1>
+    }
 }
 
 
