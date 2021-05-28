@@ -3,9 +3,14 @@
     ViewBag.Title = "Post";
 }
 
-@using (Html.BeginForm("Post", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@if (Request.Cookies["first_name"] != null)
 {
-    @Html.AntiForgeryToken()
+    var userID = Request.Cookies["user_id"].Value;
+
+
+    using (Html.BeginForm("Post", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 <div class="form-horizontal">
     <h4>Add Item</h4>
     <div>
@@ -14,13 +19,9 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.user_id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.user_id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
+    @Html.HiddenFor(m => m.user_id, new { @Value = userID })
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -46,14 +47,14 @@
             @Html.ValidationMessageFor(model => model.item_detail, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    @Html.HiddenFor(m => m.is_active, new { @Value = "1" })
+    @Html.HiddenFor(model => model.create_date, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+    @Html.HiddenFor(model => model.last_renewed_on, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
 
     <div class="form-group">
-
-            <input asp-for="Name" placeholder="Enter name"/>
-        
+        <div class="col-md-10">
             <input asp-for="Picture" type="file" name="file" />
-      
+        </div>
     </div>
 
     <div class="form-group">
@@ -64,10 +65,16 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10" style="color:green">
             @ViewBag.Message
-      
+
         </div>
     </div>
 </div>
 
-        }
+    }
 
+}
+
+
+
+else
+{ Response.Redirect("~/Auth/Login"); }
