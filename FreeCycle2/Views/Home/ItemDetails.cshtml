@@ -1,77 +1,64 @@
 ﻿@using FreeCycle2.Models
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - FreeCycle</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<style>
-    .col-sm-4 .image-container {
-        border: solid;
-    }
-
-    .col-sm-3 .title-container {
-        border: solid;
-        background-color: black;
-    }
-</style>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-
 @{
     ViewBag.Title = "ItemDetails";
-
-
 }
 
 
-<div class="container">
+
+<div class="container-fluid">
+    <div class="row">
 
 
-    @{ if ((List<Item>)ViewData["itemlist45"] != null)
-        {
-            foreach (var product in (List<Item>)ViewData["itemlist45"])
-            {
-                var base64 = Convert.ToBase64String(product.image);
-                var img = string.Format("data:Image/jpg;base64,{0}", base64);
-                <div class="row">
-                    <div class="col-sm-4 image-container" >
-                        <div>
-                            <img src="@img" width="300" height="300" />
+        <div class="col-lg-12" align="center">
+
+
+            @{ if ((List<Item>)ViewData["itemlist45"] != null)
+                {
+
+
+
+                    foreach (var product in (List<Item>)ViewData["itemlist45"])
+                    {
+                        var base64 = Convert.ToBase64String(product.image);
+                        var img = string.Format("data:Image/jpg;base64,{0}", base64);
+
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12" style="background-color: grey">
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 36pt;">@product.item_title</div>
+                                </div>
+                            </div>
+                            <div class="row" style=" height: 400px; background-color: lightgray">
+                                <br /><br />
+                                <div class="col-lg-6">
+                                    <img src="@img" width="350px" height="300px" style="border:solid" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <br /><br />
+                                    <div style="font-family: Arial;font-size: 26pt; font-weight:bold">Contact Information</div>
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 24pt;">@product.first_name @product.last_name</div>
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 20pt;">@product.email</div>
+                                    <button class="btn btn-default " type="submit">Contact</button>
+
+                                </div>
+                                <br /><br />
+                            </div>
+                            <div class="row" align="left" style="background-color: lightslategrey">
+                                <div class="col-lg-12">
+                                    <div style=" font-family:  Times New Roman, Times, serif; font-size: 20pt;">@product.item_detail</div>
+
+                                </div>
+
+
+                                <br /><br /><br /><br /><br /><br /><div align="left" style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                            </div>
+                        </div>   }
+
+                                } }
+
+                            </div> 
                         </div>
-
-                    </div>
-
-                    <div class="col-sm-3 title-container">
-                        <div class="row">
-                            <h1 style="padding:5px;">@product.item_title</h1>
-                        </div>
-
-                        <div class="row">
-                            <p style="padding:5px;">@product.item_detail</p>
-                        </div>
-                        <div class="row">
-                            <br>
-                            <p>*Ower Name*</p>
-                            <input type="submit" value="Request" name="Request" class="btn btn-default" />
-                        </div>
-                    </div>
-
-                    
-
-                </div>
-
-
-
-
-            }
-
-        } }
-
-
-
 </div>
 
 
