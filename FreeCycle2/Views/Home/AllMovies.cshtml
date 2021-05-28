@@ -1,0 +1,50 @@
+@model FreeCycle2.Models.Item
+@{
+    ViewBag.Title = "myitem";
+}
+
+@using (Html.BeginForm("AllMovies", "Home", FormMethod.Post))
+{
+    var i = 0;
+    @Html.HiddenFor(m => m.EditIndex2)
+    <style>
+        table, tr, td {
+            border: solid;
+            padding: 10px;
+        }
+    </style>
+    <table>
+        @for (i = 0; i < Model.allItems.Count(); i++)
+        {
+            if (!Model.allItems[i].IsEditable2)
+            {
+
+
+                <tr>
+                    <td style="border:none">@Html.HiddenFor(m => m.allItems[i].item_id)</td>
+                    <td>@Html.DisplayFor(m => m.allItems[i].item_title)</td>
+                    <td>@Html.DisplayFor(m => m.allItems[i].item_detail)</td>
+                    <td><img width="100px" height="100px" src="data:image;base64,@Convert.ToBase64String(Model.allItems[i].image)" /></td>
+                    <td>@Html.ActionLink("Edit", "MoviesEdit", new { id = Model.allItems[i].item_id })</td>
+                    <td>@Html.ActionLink("Delete", "MoviesDelete", new { Id = Model.allItems[i].item_id })</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+
+                    <td>@Html.HiddenFor(m => m.allItems[i].item_id)</td>
+                    <td>@Html.TextBoxFor(m => m.allItems[i].item_title)</td>
+                    <td>@Html.TextBoxFor(m => m.allItems[i].item_detail)</td>
+                    <td><img width="100px" height="100px" src="data:image;base64,@Convert.ToBase64String(Model.allItems[i].image)" /></td>
+                    <td> <input type="submit" value="Save" name="Save" class="btn btn-link" /></td>
+                    <td> <input type="submit" value="Cancel" name="Cancel" class="btn btn-link" /></td>
+                </tr>
+            }
+        }
+    </table>
+
+
+
+
+}
