@@ -6,6 +6,13 @@
     <title>@ViewBag.Title - FreeCycle</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        li #BrowseAds:hover, #Login:hover, #AdminEdit:hover, #Edit:hover, #Post:hover, #About:hover {
+            text-decoration:underline;
+        }
+        
+    </style>
 </head>
 
 <body>
@@ -25,15 +32,15 @@
                     <ul class="nav navbar-nav">
 
 
-                        <li>@Html.ActionLink("Browse Ads", "Item", "Home")</li>
+                        <li style="margin-left:45px; margin-right:5px;">@Html.ActionLink("Browse Ads", "Item", "Home", new { id = "BrowseAds" })</li>
                     </ul>
                     <ul class="nav navbar-nav ">
                         <li>
                             <form class="navbar-form navbar-left" role="search" action="@Url.Action("Search", "Search")" name="Form" method="post" onsubmit="return CheckNull()">
 
-                                <input class="form-control" type="text" size="90" id="search" name="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control" type="text" size="90" style="border-radius:0px; " id="search" name="search" placeholder="Search" aria-label="Search">
 
-                                <button class="btn btn-default " type="submit">Search</button>
+                                <button class="btn btn-default" style="background-color:#189db3; color:white; border:none; border-radius:0px;" type="submit">Search</button>
                             </form>
                         </li>
                     </ul>
@@ -41,23 +48,23 @@
                         @if (Request.Cookies["first_name"] != null)
                         {
                             var value = Request.Cookies["first_name"].Value;
-                            <li>  @Html.ActionLink(value, "Login", "Auth", null, null)</li>
+                            <li>  @Html.ActionLink(value, "Login", "Auth", null, new { id = "Login" })</li>
                             if (Request.Cookies["group_id"].Value == "1")
                             {
-                                <li>  @Html.ActionLink("Admin Edit", "AdminPage", "Home", null, null)</li>
+                                <li>  @Html.ActionLink("Admin Edit", "AdminPage", "Home", null, new { id = "AdminEdit" })</li>
                             }
                             else
                             {
-                                <li>  @Html.ActionLink("Edit", "AllMovies", "Home", null, null)</li>
+                                <li>  @Html.ActionLink("Edit", "AllMovies", "Home", null, new { id = "Edit" })</li>
                             }
                         }
                         else
                         {
-                            <li>  @Html.ActionLink("Login", "Login", "Auth", null, null)</li>
+                            <li>  @Html.ActionLink("Login", "Login", "Auth", null, new { id = "Login" })</li>
                         }
 
-                        <li>@Html.ActionLink("Post", "Post", "Home", null, null)</list>
-                        <li>@Html.ActionLink("About", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Post", "Post", "Home", new { id = "Post" })</li>
+                        <li>@Html.ActionLink("About", "Index", "Home", new { id = "About" })</li>
 
 
 

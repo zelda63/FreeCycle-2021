@@ -31,6 +31,7 @@
                     color: white;
                 }
     </style>
+    
 </head>
 
 <body>
@@ -40,10 +41,10 @@
     @{ if (ViewBag.a == 1)
 
         {
+            <div class="container-fluid">
+                <div class="vertical-menu">
 
-            <div class="vertical-menu">
 
-            <div class="container">
                     <div class="row">
                         <p style="text-align:left; font-weight:bold">Categories</p>
                         <div class="col-lg-4">
@@ -53,27 +54,29 @@
                             }
                         </div>
                         <div class="col-lg-8">
-                                @foreach (var product in (List<Item>)ViewData["itemlist"])
-                                {
-                                    var base64 = Convert.ToBase64String(product.image);
-                                    var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                            @foreach (var product in (List<Item>)ViewData["itemlist"])
+                            {
+                                var base64 = Convert.ToBase64String(product.image);
+                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
 
 
 
-                                    <a href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
-                                        <div class="row" style="border:solid;border-radius:5px; border-color:lightgray">
-                                            <div class="col-md-4" style="margin-left:0">  <img src="@img" width="150px" height="150px" /> </div>
+                                <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                    <div class="row">
+                                        <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
-                                            <div class="col-md-8"><div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
+                                        <div class="col-md-9">
+                                            <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
 
                                             <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
-                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div></div>
-                                       </div>
-                                    </a>
+                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                        </div>
+                                    </div>
+                                </a>
 
 
-                                }
-                            
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -83,7 +86,7 @@
 
         }
 
-        else  if (ViewBag.a == 3)
+        else if (ViewBag.a == 3)
         {
             <div class="container">
                 <div class="vertical-menu">
@@ -91,38 +94,46 @@
 
                     @{ if ((List<Item>)ViewData["itemlist2"] != null)
                         {
+                            <div class="container">
+                                <div class="row">
+                                    <p style="text-align:left; font-weight:bold">Categories</p>
+                                    <div class="col-lg-4">
+                                        @{
 
+                                            foreach (var category in (List<Category>)ViewData["categorylist"])
+                                            {
 
+                                                <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
+                                            }
+                                        }
+                                    </div>
 
-                            foreach (var product in (List<Item>)ViewData["itemlist2"])
-                            {
-                                var base64 = Convert.ToBase64String(product.image);
-                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                    <div class="col-sm-8">
+                                        @foreach (var product in (List<Item>
+                                            )ViewData["itemlist2"])
+                                        {
+                                            var base64 = Convert.ToBase64String(product.image);
+                                            var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                            <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id })">
+                                                <div class="row">
+                                                    <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
+                                                    <div class="col-md-9">
+                                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
 
-                                <div class="container">
-                                    <div class="row">
-
-                                                            <div class="col-sm-12">
-                                                                <a href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
-                                                                    <div class="row" style="border:solid;border-radius:5px; border-color:lightgray">
-                                                                        <div class="col-md-4" style="margin-left:0">  <img src="@img" width="150px" height="150px" /> </div>
-
-                                                                        <div class="col-md-8">
-                                                                            <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
-
-                                                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
-                                                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
+                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
+                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
+                            </div>
 
-                            }
+                        }
 
-                        } }
+                    }
 
                 </div>
             </div>
@@ -137,21 +148,29 @@
                 <div class="vertical-menu">
                     @{ if ((List<Item>)ViewData["searchlist"] != null)
                         {
-                            foreach (var product in (List<Item>)ViewData["searchlist"])
-                            {
-                                var base64 = Convert.ToBase64String(product.image);
-                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
 
 
-                                <div class="container">
-                                    <div class="row">
 
-                                        <div class="col-sm-12">
-                                            <a href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
-                                                <div class="row" style="border:solid;border-radius:5px; border-color:lightgray">
-                                                    <div class="col-md-4" style="margin-left:0">  <img src="@img" width="150px" height="150px" /> </div>
+                            <div class="container">
+                                <div class="row">
+                                    <p style="text-align:left; font-weight:bold">Categories</p>
+                                    <div class="col-lg-4">
+                                        @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                        {
+                                            <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
+                                        }
+                                    </div>
+                                    <div class="col-sm-8">
+                                        @foreach (var product in (List<Item>
+                                            )ViewData["searchlist"])
+                                        {
+                                            var base64 = Convert.ToBase64String(product.image);
+                                            var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                            <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                                <div class="row">
+                                                    <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9">
                                                         <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
 
                                                         <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
@@ -159,13 +178,14 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
+                            </div>
 
-                            }
+                        }
 
-                        } }
+                    }
 
                 </div>
             </div>

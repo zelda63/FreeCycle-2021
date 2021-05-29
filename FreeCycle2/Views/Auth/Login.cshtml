@@ -6,7 +6,7 @@
 }
 
 
-<div class="container-fluid">
+<div class="container">
     <br />
     <div class="row">
 
@@ -31,12 +31,16 @@
             {
                 using (Html.BeginForm("Login", "Auth", FormMethod.Post))
                 {
-                    <div class="container-fluid">
+                    <div class="container" style="height:200px; width:500px;">
                         <center>
-                            <br />
-                            <div style="border:1px solid lightgrey;background-color:white;border-radius:30px;padding:50px; box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.6), 0 1px 10px 0 rgba(0, 0, 0, 0.19);">
+                            
+                        
+                            <div style="background-color:white;padding:50px; padding-top:10px; box-shadow: 0px 0px 8px #888888;">
+                                <h2>Login</h2>
+                                <br />
                                 <div class="row">
                                     <div class="col-sm-12">
+                                       
                                         @Html.TextBoxFor(model => model.email, new { @class = "form-control", @placeholder = " Username", @style = "background-color:whitesmoke" })
                                     </div>
                                 </div>
@@ -52,7 +56,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        @Html.PasswordFor(model => model.login_pwd_encry, new { @class = "form-control", @placeholder = " login_pwd_encry", @style = "background-color:whitesmoke" })
+                                        @Html.PasswordFor(model => model.login_pwd_encry, new { @class = "form-control", @placeholder = " Password", @style = "background-color:whitesmoke" })
                                     </div>
                                 </div>
                                 <div class="row">
@@ -67,7 +71,7 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <input type="submit" style="width:80px;color:dimgray" value="Login" class="btn btn-default" />
+                                        <input type="submit" style="width:80px; background-color:#189db3;  color:white;" value="Login" class="btn btn-default" />
                                     </div>
                                 </div>
 

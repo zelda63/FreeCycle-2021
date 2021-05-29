@@ -124,11 +124,13 @@
     <Compile Include="Controllers\ItemDetailsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="DataAccessObjects\CategoryDAO.cs" />
+    <Compile Include="DataAccessObjects\exchangesDAO.cs" />
     <Compile Include="DataAccessObjects\ItemDAO.cs" />
     <Compile Include="DataAccessObjects\UserDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\exchanges.cs" />
     <Compile Include="Models\ViewModel1.cs" />
     <Compile Include="Models\FreeCycle1.cs" />
     <Compile Include="Models\FreeCycle2.cs" />
@@ -275,6 +277,8 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Home\ItemDetails.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Home\EditCategory.cshtml" />
+    <Content Include="Views\Home\exchanges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -61,6 +61,8 @@ namespace FreeCycle2.Controllers
             }
             else
             {
+                List<Category> categorylist = CategoryDAO.FCategory();
+                ViewData["categorylist"] = categorylist;
                 int id2 = categoryID ?? default(int);
                 List<Item> itemlist2 = ItemDAO.ItemsByCategory(id2);
                 ViewData["itemlist2"] = itemlist2;
