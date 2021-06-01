@@ -14,6 +14,9 @@ namespace FreeCycle2.Controllers
 
         public ActionResult Search(string search)
         {
+            List<Category> categorylist = CategoryDAO.FCategory();
+            ViewData["categorylist"] = categorylist;
+
             if (search == "")
             {
                 ViewBag.a = "Please enter a search item..";

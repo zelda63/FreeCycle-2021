@@ -59,8 +59,7 @@ namespace FreeCycle2.Controllers
                 ViewBag.a = 1;
                 return View("Item");
             }
-            else
-            {
+            else {
                 int id2 = categoryID ?? default(int);
                 List<Item> itemlist2 = ItemDAO.ItemsByCategory(id2);
                 ViewData["itemlist2"] = itemlist2;
@@ -98,105 +97,25 @@ namespace FreeCycle2.Controllers
 
             if (Save == "Save")
             {
-                CategoryDAO dAO = new CategoryDAO();
-                dAO.InsertMovie(movie);
-                ViewBag.Message = "Category Added Successfully.";
-            }
-            return View("AddMovie");
-        }
-
-        public ActionResult AllMovies(Item movies, HttpPostedFileBase file, string Save)
-        {
-            ViewBag.Message = "All Movies.";
-            ItemDAO dAO = new ItemDAO();
-            if (Save == "Save")
-            {
+                ItemDAO dAO = new ItemDAO();
                 if (file != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
                         file.InputStream.CopyTo(ms);
                         byte[] array = ms.ToArray();
-                        Item movie = movies.allItems[movies.EditIndex2];
-                        movie.image = array;
-                        dAO.updateMovie(movie);
-                        movie.IsEditable2 = false;
-                        movies.EditIndex2 = -1;
+
+                        dAO.Post(id22, id23, item_title, item_detail, array);
+
+
                     }
+                    
                 }
-                else {
-                    Item movie = movies.allItems[movies.EditIndex2];
-                    dAO.updateMovie(movie);
-                    movie.IsEditable2 = false;
-                    movies.EditIndex2 = -1;
-                }
-
+               
+               
+                ViewBag.Message = "Movie Added Successfully.";
             }
-            var value = Request.Cookies["user_id"].Value;
-            var groupidvalue = Request.Cookies["group_id"].Value;
-            if (groupidvalue == "1") {
-                movies = dAO.ItemsForAdmin();
-            }
-            else
-            {
-                int.TryParse(value, out int result);
-                movies = dAO.ItemsByUser(result);
-            }
-            return View(movies);
-        }
-
-        public ActionResult EditCategory(Category movies, string Save)
-        {
-            ViewBag.Message = "All Movies.";
-            CategoryDAO dAO = new CategoryDAO();
-            if (Save == "Save")
-            {
-                Category movie = movies.allCategories[movies.EditIndex];
-                dAO.updateMovie2(movie);
-                movie.IsEditable = false;
-                movies.EditIndex = -1;
-            }
-            movies = dAO.FCategory2();
-            return View(movies);
-        }
-
-        public ActionResult MoviesEdits(int? id, Category movies)
-        {
-            int id2 = id ?? default(int);
-            CategoryDAO dAO = new CategoryDAO();
-            movies = dAO.FCategory2();
-            movies.EditIndex = dAO.setMovieToEditMode2(movies.allCategories, id2);
-            ViewBag.Message = "All movies.";
-            return View("EditCategory", movies);
-        }
-
-        public ActionResult MoviesDeleted(int? id, Category movies)
-        {
-            int id2 = id ?? default(int);
-            CategoryDAO dAO = new CategoryDAO();
-            dAO.deleteMovie2(id2);
-            movies = dAO.FCategory2();
-            ViewBag.Message = "All Movies.";
-            return View("EditCategory", movies);
-        }
-        public ActionResult MoviesEdit(int? id, Item movies)
-        {
-            int id2 = id ?? default(int);
-            var value = Request.Cookies["user_id"].Value;
-            int.TryParse(value, out int result);
-            ItemDAO dAO = new ItemDAO();
-            var groupidvalue = Request.Cookies["group_id"].Value;
-            if (groupidvalue == "1")
-            {
-                movies = dAO.ItemsForAdmin();
-            }
-            else
-            {
-                movies = dAO.ItemsByUser(result);
-            }
-            movies.EditIndex2 = dAO.setMovieToEditMode(movies.allItems, id2);
-            ViewBag.Message = "All movies.";
-            return View("AllMovies", movies);
+            return View("Post");
         }
 
         public ActionResult MoviesDelete(int? id, Item movies)

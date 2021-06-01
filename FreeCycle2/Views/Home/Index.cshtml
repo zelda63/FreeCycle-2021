@@ -1,29 +1,51 @@
 ﻿@{
     ViewBag.Title = "Landing Page";
 }
+<style>
+    body {
+       
+    }
 
-<div style="text-align:center;" >
-    <img height="150" width="150" class="img" src="~/Images/Recycle.png" alt="Recycle logo" />
-    <h1>Reduce, Reuse, Recycle</h1>
+    .dark-mode {
+        background-color: #262626;
+        color: white;
+    }
+</style>
 
-</div>
 
-<div class="row">
+<body>
+    <div style="text-align:center;">
+        <img height="150" width="150" class="img" src="~/Images/Recycle.png" alt="Recycle logo" />
+        <h1>Reduce, Reuse, Recycle</h1>
 
-    <h2>What is FreeCycle?</h2>
-    <p>
-        FreeCycle is a free exchange network that allows members to donate and aquire reusable items. The objective is to promote sustainability through waste diversion and landfill avoidance.
-    </p>
+    </div>
 
-</div>
+    <div class="row">
 
-<div class="row">
-    <h2>How to use FreeCycle?</h2>
-    <p>
-        If you are a student, staff, faculty or a member of Saskatchewan Polytechnic community with
-        a saskpolytech.ca email address, login to access all the features. xxxxx
-    </p>
+        <h2>What is FreeCycle?</h2>
+        <p>
+            FreeCycle is a free exchange network that allows members to donate and aquire reusable items. The objective is to promote sustainability through waste diversion and landfill avoidance.
+        </p>
 
-    <p><a class="btn btn-default" href="/Home/HomePage">Go to Home &raquo;</a></p>
+    </div>
 
-</div>
+    <div class="row">
+        <h2>How to use FreeCycle?</h2>
+        <p>
+            If you are a student, staff, faculty or a member of Saskatchewan Polytechnic community with
+            a saskpolytech.ca email address, login to access all the features.
+        </p>
+
+        <p><a class="btn btn-default" style="background-color:#189db3;  color:white;" href="/Home/HomePage">Go to Home &raquo;</a></p>
+
+    </div>
+
+    <button onclick="myFunction()">Toggle dark mode</button>
+
+    <script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+    </script>
+</body>

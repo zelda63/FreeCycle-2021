@@ -6,6 +6,13 @@
     <title>@ViewBag.Title - FreeCycle</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        li #BrowseAds:hover, #Login:hover, #AdminEdit:hover, #Edit:hover, #Post:hover, #About:hover {
+            text-decoration:underline;
+        }
+        
+    </style>
 </head>
 
 <body>
@@ -24,40 +31,23 @@
                 <div id="navbar container">
                     <ul class="nav navbar-nav">
 
-
+                        <li>@Html.ActionLink("Home", "HomePage", "Home")</li>
                         <li>@Html.ActionLink("Browse Ads", "Item", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav ">
                         <li>
                             <form class="navbar-form navbar-left" role="search" action="@Url.Action("Search", "Search")" name="Form" method="post" onsubmit="return CheckNull()">
-
-                                <input class="form-control" type="text" size="90" id="search" name="search" placeholder="Search" aria-label="Search">
-
-                                <button class="btn btn-default " type="submit">Search</button>
+                               
+                                    <input class="form-control" type="text" size="90" id="search" name="search" placeholder="Search" aria-label="Search">
+                                
+                                   <button class="btn btn-default "type="submit" >Search</button>
                             </form>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        @if (Request.Cookies["first_name"] != null)
-                        {
-                            var value = Request.Cookies["first_name"].Value;
-                            <li>  @Html.ActionLink(value, "Login", "Auth", null, null)</li>
-                            if (Request.Cookies["group_id"].Value == "1")
-                            {
-                                <li>  @Html.ActionLink("Admin Edit", "AdminPage", "Home", null, null)</li>
-                            }
-                            else
-                            {
-                                <li>  @Html.ActionLink("Edit", "AllMovies", "Home", null, null)</li>
-                            }
-                        }
-                        else
-                        {
-                            <li>  @Html.ActionLink("Login", "Login", "Auth", null, null)</li>
-                        }
 
-                        <li>@Html.ActionLink("Post", "Post", "Home", null, null)</list>
-                        <li>@Html.ActionLink("About", "Index", "Home")</li>
+                        <li>  @Html.ActionLink("Login", "Login", "Auth", null, null)</li>
+                        <li style="align-content:end;">@Html.ActionLink("Post", "Post", "Home", null, null)</list>
 
 
 

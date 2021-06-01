@@ -3,7 +3,6 @@
     ViewBag.Title = "myitem";
 }
 
-@using (Html.BeginForm("AllMovies", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     var i = 0;
     @Html.HiddenFor(m => m.EditIndex2)
@@ -36,7 +35,6 @@
                     <td>@Html.HiddenFor(m => m.allItems[i].item_id)</td>
                     <td>@Html.TextBoxFor(m => m.allItems[i].item_title)</td>
                     <td>@Html.TextBoxFor(m => m.allItems[i].item_detail)</td>
-                    <td><input asp-for="Picture" type="file" name="file" /></td>
                     <td> <input type="submit" value="Save" name="Save" class="btn btn-link" /></td>
                     <td> <input type="submit" value="Cancel" name="Cancel" class="btn btn-link" /></td>
                 </tr>

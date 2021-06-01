@@ -13,8 +13,8 @@ namespace FreeCycle2.Controllers
 
         {
             User user = null;
-
-            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDB2; Integrated Security=true")))
+            
+            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
             {
                 conn.Open();
                 string sql = @"SELECT user_id, email, group_id, login_pwd_encry, first_name, last_name from user_account WHERE email = '" + email + "'";

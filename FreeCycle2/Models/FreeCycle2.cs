@@ -2,7 +2,7 @@
 
 namespace FreeCycle2.Models
 {
-    public class ItemsModel // This class holds a list of Movies
+    public class ItemsModel 
     {
         public int EditIndex { get; set; }
 
@@ -12,7 +12,7 @@ namespace FreeCycle2.Models
         public ItemsModel() { }
     }
 
-    public class Categs // This class holds a list of Movies
+    public class Categs 
     {
         public int EditIndex { get; set; }
 
