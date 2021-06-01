@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,7 +35,7 @@ namespace FreeCycle2.DataAccessObjects
                         image = (byte[])reader["image"]
                     };
                     items.Add(i);
-                   
+
                 }
             }
             return items;
@@ -71,7 +72,7 @@ namespace FreeCycle2.DataAccessObjects
                                 from items 
                                     inner join images on items.item_id = images.item_id where category_id ='" + id + "'";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-        
+
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -96,14 +97,27 @@ namespace FreeCycle2.DataAccessObjects
             SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-        
-            
-                cmd.CommandText = @"UPDATE items SET item_title=@item_title,item_detail=@item_detail where item_id=@item_id";
-            cmd.Parameters.AddWithValue("@item_title", movie.item_title);        
-            cmd.Parameters.AddWithValue("@item_detail", movie.item_detail);
-            cmd.Parameters.AddWithValue("@item_id", movie.item_id);
-            con.Open();
-            cmd.ExecuteNonQuery();
+
+            if (movie.image != null)
+            {
+                cmd.CommandText = @" UPDATE images SET image=@image where item_id=@item_id; UPDATE items SET item_title=@item_title,item_detail=@item_detail where item_id=@item_id;";
+                cmd.Parameters.AddWithValue("@item_title", movie.item_title);
+                cmd.Parameters.AddWithValue("@item_detail", movie.item_detail);
+                cmd.Parameters.AddWithValue("@item_id", movie.item_id);
+                cmd.Parameters.AddWithValue("@image", movie.image);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                cmd.CommandText = @"UPDATE items SET item_title=@item_title,item_detail=@item_detail where item_id=@item_id;";
+                cmd.Parameters.AddWithValue("@item_title", movie.item_title);
+                cmd.Parameters.AddWithValue("@item_detail", movie.item_detail);
+                cmd.Parameters.AddWithValue("@item_id", movie.item_id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+
         }
 
         public void deleteMovie(int id)

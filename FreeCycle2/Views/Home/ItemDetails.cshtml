@@ -1,6 +1,7 @@
-﻿@using FreeCycle2.Models
+﻿
+@using FreeCycle2.Models
 @{
-    
+    ViewBag.Title = "ItemDetails";
 }
 
 
@@ -23,13 +24,13 @@
                         var img = string.Format("data:Image/jpg;base64,{0}", base64);
 
 
-                        <div class="container-fluid" style="box-shadow: 0px 0px 8px #888888;">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-lg-12" style="">
-                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 36pt;  background-color:#F8F8F8; border:thin; text-align:left;">@product.item_title</div>
+                                <div class="col-lg-12" style="background-color: grey">
+                                    <div style="font-family: Helvetica, Sans-Serif;font-size: 36pt;">@product.item_title</div>
                                 </div>
                             </div>
-                            <div class="row" style=" height: 400px;">
+                            <div class="row" style=" height: 400px; background-color: lightgray">
                                 <br /><br />
                                 <div class="col-lg-6">
                                     <img src="@img" width="350px" height="300px" style="border:solid" />
@@ -39,12 +40,19 @@
                                     <div style="font-family: Arial;font-size: 26pt; font-weight:bold">Contact Information</div>
                                     <div style="font-family: Helvetica, Sans-Serif;font-size: 24pt;">@product.first_name @product.last_name</div>
                                     <div style="font-family: Helvetica, Sans-Serif;font-size: 20pt;">@product.email</div>
-                                    <button class="btn btn-default " type="submit">Contact</button>
+                                    @if (Request.Cookies["first_name"] != null)
+                                    {
+                                        <a href="mailto: @product.email?Subject=@product.item_title" class="btn btn-primary">Contact</a>
+                                    }
+                                    else
+                                    {
+                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 12pt;">Login to contact </div>
+                                    }
 
                                 </div>
                                 <br /><br />
                             </div>
-                            <div class="row" align="left" style="border: thin;">
+                            <div class="row" align="left" style="background-color: lightslategrey">
                                 <div class="col-lg-12">
                                     <div style=" font-family:  Times New Roman, Times, serif; font-size: 20pt;">@product.item_detail</div>
 
@@ -53,14 +61,12 @@
 
                                 <br /><br /><br /><br /><br /><br /><div align="left" style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
                             </div>
-                        </div>   }
+                        </div> }
 
-                                } }
+                } }
 
-                            </div> 
-                        </div>
+        </div>
+    </div>
 </div>
-
-
 
 
