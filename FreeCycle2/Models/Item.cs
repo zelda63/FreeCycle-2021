@@ -22,8 +22,11 @@ namespace FreeCycle2.Models
 
         public DateTime create_date { get; set; }
         public DateTime last_renewed_on { get; set; }
+
+        [Display(Name = "Title")]
         public string item_title { get; set; }
 
+        [Display(Name = "Description")]
         public string item_detail { get; set; }
 
         [Display(Name = "User")]
