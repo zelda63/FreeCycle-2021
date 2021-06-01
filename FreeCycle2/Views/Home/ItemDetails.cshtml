@@ -39,7 +39,13 @@
                                     <div style="font-family: Arial;font-size: 26pt; font-weight:bold">Contact Information</div>
                                     <div style="font-family: Helvetica, Sans-Serif;font-size: 24pt;">@product.first_name @product.last_name</div>
                                     <div style="font-family: Helvetica, Sans-Serif;font-size: 20pt;">@product.email</div>
-                                    <button class="btn btn-default " type="submit">Contact</button>
+                                    @if (Request.Cookies["first_name"] != null)
+                                    {
+                                        <a href="mailto: @product.email?Subject=@product.item_title" class="btn btn-primary">Contact</a>
+                                    }
+                                    else { 
+                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 12pt;">Login to contact </div>
+                                    }
 
                                 </div>
                                 <br /><br />

@@ -105,16 +105,32 @@ namespace FreeCycle2.Controllers
             return View("AddMovie");
         }
 
-        public ActionResult AllMovies(Item movies, string Save)
+        public ActionResult AllMovies(Item movies, HttpPostedFileBase file, string Save)
         {
             ViewBag.Message = "All Movies.";
             ItemDAO dAO = new ItemDAO();
             if (Save == "Save")
             {
-                Item movie = movies.allItems[movies.EditIndex2];
-                   dAO.updateMovie(movie);
-                  movie.IsEditable2 = false;
-                 movies.EditIndex2 = -1;
+                if (file != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        byte[] array = ms.ToArray();
+                        Item movie = movies.allItems[movies.EditIndex2];
+                        movie.image = array;
+                        dAO.updateMovie(movie);
+                        movie.IsEditable2 = false;
+                        movies.EditIndex2 = -1;
+                    }
+                }
+                else {
+                    Item movie = movies.allItems[movies.EditIndex2];
+                    dAO.updateMovie(movie);
+                    movie.IsEditable2 = false;
+                    movies.EditIndex2 = -1;
+                }
+
             }
             var value = Request.Cookies["user_id"].Value;
             var groupidvalue = Request.Cookies["group_id"].Value;
@@ -169,7 +185,15 @@ namespace FreeCycle2.Controllers
             var value = Request.Cookies["user_id"].Value;
             int.TryParse(value, out int result);
             ItemDAO dAO = new ItemDAO();
-            movies = dAO.ItemsByUser(result);
+            var groupidvalue = Request.Cookies["group_id"].Value;
+            if (groupidvalue == "1")
+            {
+                movies = dAO.ItemsForAdmin();
+            }
+            else
+            {
+                movies = dAO.ItemsByUser(result);
+            }
             movies.EditIndex2 = dAO.setMovieToEditMode(movies.allItems, id2);
             ViewBag.Message = "All movies.";
             return View("AllMovies", movies);
