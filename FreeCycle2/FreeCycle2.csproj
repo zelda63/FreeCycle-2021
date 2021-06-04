@@ -134,7 +134,6 @@
     <Compile Include="Models\ViewModel1.cs" />
     <Compile Include="Models\FreeCycle1.cs" />
     <Compile Include="Models\FreeCycle2.cs" />
-    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
