@@ -18,23 +18,23 @@
     <table>
         <tr>
             <td>@Html.LabelFor(model => model.exchange_id)</td>
-            <td>@Html.LabelFor(model => model.item_id)</td>
-            <td>@Html.LabelFor(model => model.receiver_id)</td>
+            <td>@Html.LabelFor(model => model.item_title)</td>
+            <td>@Html.LabelFor(model => model.email)</td>
             <td>@Html.LabelFor(model => model.date_txn)</td>
         </tr>
-            @for (i = 0; i < Model.allexchanges.Count(); i++)
-            {
+        @for (i = 0; i < Model.allexchanges.Count(); i++)
+        {
 
 
             <tr>
                 <td style="border:none">@Html.DisplayFor(m => m.allexchanges[i].exchange_id)</td>
-                <td>@Html.DisplayFor(m => m.allexchanges[i].item_id)</td>
-                <td>@Html.DisplayFor(m => m.allexchanges[i].receiver_id)</td>
+                <td>@Html.DisplayFor(m => m.allexchanges[i].item_title)</td>
+                <td>@Html.DisplayFor(m => m.allexchanges[i].email)</td>
                 <td>@Html.DisplayFor(m => m.allexchanges[i].date_txn)</td>
             </tr>
 
         }
-        </table>
+    </table>
 
 
 
