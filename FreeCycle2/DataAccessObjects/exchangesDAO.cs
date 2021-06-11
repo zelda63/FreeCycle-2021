@@ -15,7 +15,10 @@ namespace FreeCycle2.DataAccessObjects
             using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
             {
                 conn.Open();
-                string sql = @"SELECT exchange_id, item_id ,receiver_id,date_txn from exchanges;";
+                string sql = @"SELECT exchanges.exchange_id, exchanges.item_id, items.item_title, exchanges.receiver_id, exchanges.date_txn
+from exchanges
+ inner join 
+ items on exchanges.item_id = items.item_id;";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -23,6 +26,7 @@ namespace FreeCycle2.DataAccessObjects
                     exchanges i = new exchanges()
                     {
                         exchange_id = (int)reader["exchange_id"],
+                        item_title = (int)reader["item_name"],
                         item_id = (int)reader["item_id"],
                         receiver_id = (int)reader["receiver_id"],
                         date_txn = (DateTime)reader["date_txn"]

@@ -245,3 +245,4 @@ C:\Users\Nimrat Sembhi\Documents\freecycle-2021\FreeCycle2\obj\Debug\FreeCycle2.
 C:\Users\Nimrat Sembhi\Documents\freecycle-2021\FreeCycle2\obj\Debug\FreeCycle2.csproj.CopyComplete
 C:\Users\Nimrat Sembhi\Documents\freecycle-2021\FreeCycle2\obj\Debug\FreeCycle2.dll
 C:\Users\Nimrat Sembhi\Documents\freecycle-2021\FreeCycle2\obj\Debug\FreeCycle2.pdb
+C:\Users\Nimrat Sembhi\Documents\freecycle-2021\FreeCycle2\obj\Debug\FreeCycle2.csprojAssemblyReference.cache

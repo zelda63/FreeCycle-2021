@@ -24,7 +24,7 @@
 
     </div>
     <div class="col-sm-11">
-        @Html.DropDownListFor(model => model.category_id, new SelectList(Enum.GetValues(typeof(FreeCycle2.Models.Category.CategoryType)).OfType<FreeCycle2.Models.Category.CategoryType>().ToDictionary(x => Convert.ToInt32(x), y => y.ToString()), "Key", "Value"), "Select Category")
+        @Html.DropDownListFor(model => model.category_id, new SelectList(ViewBag.Categories, "Category_Id", "Category_name"), "Select Category")
     </div>
     </div>
 

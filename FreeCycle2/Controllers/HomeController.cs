@@ -247,6 +247,9 @@ namespace FreeCycle2.Controllers
 
                 ViewBag.Message = "Item posted Successfully.";
             }
+            List<Category> categorylist = CategoryDAO.FCategory();
+            ViewData["categorylist"] = categorylist;
+            ViewBag.Categories = categorylist;
             return View("Post");
         }
 
