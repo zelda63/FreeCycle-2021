@@ -1,5 +1,4 @@
-﻿
-using FreeCycle2.DataAccessObjects;
+﻿using FreeCycle2.DataAccessObjects;
 using FreeCycle2.Models;
 using System;
 using System.Collections.Generic;
@@ -63,8 +62,6 @@ namespace FreeCycle2.Controllers
             }
             else
             {
-                List<Category> categorylist = CategoryDAO.FCategory();
-                ViewData["categorylist"] = categorylist;
                 int id2 = categoryID ?? default(int);
                 List<Item> itemlist2 = ItemDAO.ItemsByCategory(id2);
                 ViewData["itemlist2"] = itemlist2;
@@ -109,10 +106,15 @@ namespace FreeCycle2.Controllers
             return View("AddMovie");
         }
 
-        public ActionResult AllMovies(Item movies, HttpPostedFileBase file, string Save)
+        public ActionResult AllMovies(Item movies, HttpPostedFileBase file, bool? IsActive, string email, string Save)
         {
             ViewBag.Message = "All Movies.";
             ItemDAO dAO = new ItemDAO();
+            exchangesDAO edAO = new exchangesDAO();
+            bool id2 = IsActive ?? default(bool);
+
+
+
             if (Save == "Save")
             {
                 if (file != null)
@@ -123,6 +125,24 @@ namespace FreeCycle2.Controllers
                         byte[] array = ms.ToArray();
                         Item movie = movies.allItems[movies.EditIndex2];
                         movie.image = array;
+                        if (id2 == true)
+                        {
+                            movie.is_active = '1';
+
+                        }
+                        else
+                        {
+                            movie.is_active = '0';
+                        }
+                        if (email != null)
+                        {
+                            movie.exchanged = '1';
+                            edAO.updateExchange(email, movie);
+                        }
+                        else
+                        {
+                            movie.exchanged = '0';
+                        }
                         dAO.updateMovie(movie);
                         movie.IsEditable2 = false;
                         movies.EditIndex2 = -1;
@@ -131,6 +151,24 @@ namespace FreeCycle2.Controllers
                 else
                 {
                     Item movie = movies.allItems[movies.EditIndex2];
+                    if (id2 == true)
+                    {
+                        movie.is_active = '1';
+
+                    }
+                    else
+                    {
+                        movie.is_active = '0';
+                    }
+                    if (email != null)
+                    {
+                        movie.exchanged = '1';
+                        edAO.updateExchange(email, movie);
+                    }
+                    else
+                    {
+                        movie.exchanged = '0';
+                    }
                     dAO.updateMovie(movie);
                     movie.IsEditable2 = false;
                     movies.EditIndex2 = -1;
@@ -217,13 +255,15 @@ namespace FreeCycle2.Controllers
             return View("AllMovies", movies);
         }
 
-        public ActionResult Post(int? user_id, int? category_id, char? is_active, DateTime? create_date, DateTime? last_renewed_on, string item_title, string item_detail, HttpPostedFileBase file, string Save)
+
+        public ActionResult Post(int? user_id, int? category_id, char? is_active, char? exchanged, DateTime? create_date, DateTime? last_renewed_on, string item_title, string item_detail, HttpPostedFileBase file, string Save)
         {
 
             ViewBag.Message = "Add an Item Page.";
             int id22 = user_id ?? default(int);
             int id23 = category_id ?? default(int);
             char id24 = is_active ?? default(char);
+            char id27 = exchanged ?? default(char);
             DateTime id25 = create_date ?? default(DateTime);
             DateTime id26 = last_renewed_on ?? default(DateTime);
 
@@ -237,7 +277,7 @@ namespace FreeCycle2.Controllers
                         file.InputStream.CopyTo(ms);
                         byte[] array = ms.ToArray();
 
-                        dAO.Post(id22, id23, id24, id25, id26, item_title, item_detail, array);
+                        dAO.Post(id22, id23, id24, id27, id25, id26, item_title, item_detail, array);
 
 
                     }

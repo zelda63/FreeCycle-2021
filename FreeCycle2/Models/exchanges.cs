@@ -9,7 +9,9 @@ namespace FreeCycle2.Models
     {
         public int exchange_id { get; set; }
         public int item_id { get; set; }
-        public int item_title { get; set; }
+
+        public string item_title { get; set; }
+        public string email { get; set; }
         public int receiver_id { get; set; }
         public DateTime date_txn { get; set; }
 
