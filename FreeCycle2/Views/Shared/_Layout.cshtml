@@ -32,7 +32,7 @@
                     <ul class="nav navbar-nav">
 
 
-                        <li style="margin-left:45px; margin-right:5px;">@Html.ActionLink("Browse Ads", "Item", "Home", new { id = "BrowseAds" })</li>
+                        <li style="margin-left:45px; margin-right:5px;">@Html.ActionLink("Browse Ads", "Item", new { controller = "Home" }, new { id = "BrowseAds" })</li>
                     </ul>
                     <ul class="nav navbar-nav ">
                         <li>
@@ -56,7 +56,7 @@
                             else
                             {
                                 <li>  @Html.ActionLink("My Account", "AllMovies", "Home", null, new { id = "Edit" })</li>
-                                <li>@Html.ActionLink("Post", "Post", "Home", new { id = "Post" })</li>
+                                <li>@Html.ActionLink("Post", "Post", new { controller = "Home" }, new { id = "Post" })</li>
                             }
                             var value = Request.Cookies["first_name"].Value;
                             <li>  @Html.ActionLink("Logout", "Login", "Auth", null, new { id = "Login" })</li>
@@ -67,7 +67,7 @@
                         }
 
                         
-                        <li>@Html.ActionLink("About", "Index", "Home", new { id = "About" })</li>
+                        <li>@Html.ActionLink("About", "Index", new { controller = "Home" }, new { id = "About" })</li>
 
 
 

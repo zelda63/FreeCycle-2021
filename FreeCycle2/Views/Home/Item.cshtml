@@ -23,7 +23,7 @@
             }
 
                 .vertical-menu a:hover {
-                    background-color: grey;
+                    text-decoration:underline;
                 }
 
                 .vertical-menu a.active {
@@ -46,14 +46,25 @@
 
 
                     <div class="row">
-                        <p style="text-align:left; font-weight:bold">Categories</p>
-                        <div class="col-lg-4">
-                            @foreach (var category in (List<Category>)ViewData["categorylist"])
-                            {
-                                <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
+                       
+                            <div class="col-sm-2">
+                                <h4 style="text-align:left; font-weight:bold">Categories</h4>
+                                @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                {
+                                    <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id })">@category.Category_name</a>
+                                }
+                            </div>
+                        <div class="col-sm-9">
+                            @{
+                                var itemCount = 0;
+                                foreach (var product in (List<Item>)ViewData["itemlist"])
+                                {
+
+                                    itemCount++;
+                                }
+
+                                <h4>Showing @itemCount Ads </h4>
                             }
-                        </div>
-                        <div class="col-lg-8">
                             @foreach (var product in (List<Item>)ViewData["itemlist"])
                             {
                                 var base64 = Convert.ToBase64String(product.image);
@@ -66,10 +77,13 @@
                                         <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
                                         <div class="col-md-9">
-                                            <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
+                                            <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                @product.item_title
+                                            </h4>
+                                            <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
 
-                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
-                                            <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                            <div style="font-size: 14px;">@product.item_detail</div>
+
                                         </div>
                                     </div>
                                 </a>
@@ -96,8 +110,9 @@
                         {
                             <div class="container">
                                 <div class="row">
-                                    <p style="text-align:left; font-weight:bold">Categories</p>
-                                    <div class="col-lg-4">
+                                  
+                                    <div class="col-sm-2">
+                                          <p style="text-align:left; font-weight:bold">Categories</p>
                                         @{
 
                                             foreach (var category in (List<Category>)ViewData["categorylist"])
@@ -108,7 +123,17 @@
                                         }
                                     </div>
 
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-9">
+                                        @{
+                                            var itemCount = 0;
+                                            foreach (var product in (List<Item>)ViewData["itemlist2"])
+                                            {
+
+                                                itemCount++;
+                                            }
+
+                                            <h4>Showing @itemCount Ads </h4>
+                                        }
                                         @foreach (var product in (List<Item>
                                             )ViewData["itemlist2"])
                                         {
@@ -119,10 +144,13 @@
                                                     <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
                                                     <div class="col-md-9">
-                                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
+                                                        <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                            @product.item_title
+                                                        </h4>
+                                                        <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
 
-                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
-                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                                        <div style="font-size: 14px;">@product.item_detail</div>
+
                                                     </div>
                                                 </div>
                                             </a>
@@ -153,14 +181,25 @@
 
                             <div class="container">
                                 <div class="row">
-                                    <p style="text-align:left; font-weight:bold">Categories</p>
-                                    <div class="col-lg-4">
+                                   
+                                    <div class="col-sm-2">
+                                         <p style="text-align:left; font-weight:bold">Categories</p>
                                         @foreach (var category in (List<Category>)ViewData["categorylist"])
                                         {
                                             <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
                                         }
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-9">
+                                        @{
+                                            var itemCount = 0;
+                                            foreach (var product in (List<Item>)ViewData["searchlist"])
+                                            {
+
+                                                itemCount++;
+                                            }
+
+                                            <h4>Showing @itemCount Ads </h4>
+                                        }
                                         @foreach (var product in (List<Item>
                                             )ViewData["searchlist"])
                                         {
@@ -171,10 +210,13 @@
                                                     <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
                                                     <div class="col-md-9">
-                                                        <div style="font-family: Helvetica, Sans-Serif;font-size: 16pt;">@product.item_title</div>
+                                                        <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                            @product.item_title
+                                                        </h4>
+                                                        <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
 
-                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.item_detail</div>
-                                                        <div style=" font-family:  Times New Roman, Times, serif; font-size: 10pt;">@product.create_date</div>
+                                                        <div style="font-size: 14px;">@product.item_detail</div>
+
                                                     </div>
                                                 </div>
                                             </a>

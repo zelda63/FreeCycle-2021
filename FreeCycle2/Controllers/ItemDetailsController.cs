@@ -19,7 +19,11 @@ namespace FreeCycle2.Controllers
             ViewBag.a = 45;
             return View("../Home/ItemDetails");
 
+        }
+        public ActionResult Index()
+        {
 
+            return View("../Home/Index");
         }
     }
 }
