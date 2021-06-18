@@ -192,7 +192,7 @@ namespace FreeCycle2.DataAccessObjects
                         exchanged = (char)reader["exchanged"].ToString()[0],
                         image = (byte[])reader["image"]
                     };
-                    if (i.exchanged == '0')
+                    if (i.exchanged == '0' || i.is_active == '1')
                     {
                         items3.Add(i);
                     }
@@ -215,9 +215,9 @@ namespace FreeCycle2.DataAccessObjects
             using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
             {
                 conn.Open();
-                string sql = @"SELECT items.item_id,items.create_date,items.item_title,items.is_active,items.item_detail, images.image
+                string sql = @"SELECT items.item_id,items.create_date,items.item_title,items.is_active,items.exchanged,items.item_detail, images.image
                             from items 
-                            inner join images on items.item_id = images.item_id";
+                            inner join images on items.item_id = images.item_id ";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -230,6 +230,7 @@ namespace FreeCycle2.DataAccessObjects
                         item_title = (string)reader["item_title"],
                         item_detail = (string)reader["item_detail"],
                         is_active = (char)reader["is_active"].ToString()[0],
+                        exchanged = (char)reader["exchanged"].ToString()[0],
                         image = (byte[])reader["image"]
                     };
                     if (i.exchanged == '0')
