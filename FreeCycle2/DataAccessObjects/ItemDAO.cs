@@ -192,7 +192,7 @@ namespace FreeCycle2.DataAccessObjects
                         exchanged = (char)reader["exchanged"].ToString()[0],
                         image = (byte[])reader["image"]
                     };
-                    if (i.exchanged == '0')
+                    if (i.exchanged == '0' || i.is_active == '1')
                     {
                         items3.Add(i);
                     }
