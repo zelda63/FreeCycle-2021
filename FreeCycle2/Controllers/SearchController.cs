@@ -59,6 +59,8 @@ namespace FreeCycle2.Controllers
 
 
             ViewBag.a = 2;
+            var searchString = search;
+            ViewBag.search = searchString;
 
             return View("../Home/Item");
         }
