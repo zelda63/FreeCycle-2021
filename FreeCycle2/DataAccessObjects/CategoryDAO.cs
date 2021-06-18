@@ -117,8 +117,10 @@ namespace FreeCycle2.DataAccessObjects
             SqlConnection con = new SqlConnection(conString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "INSERT INTO category(category_name) VALUES ( @category_name)";
+            cmd.CommandText = "INSERT INTO category(category_name, max_images_allowed, post_validity_interval_in_days) VALUES ( @category_name, @max_images_allowed, @post_validity_interval_in_days)";
             cmd.Parameters.AddWithValue("@category_name", movie.Category_name);
+            cmd.Parameters.AddWithValue("@max_images_allowed", movie.max_images_allowed);
+            cmd.Parameters.AddWithValue("@post_validity_interval_in_days", movie.post_validity_interval_in_days);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
