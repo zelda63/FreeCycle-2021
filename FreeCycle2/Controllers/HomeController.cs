@@ -60,6 +60,8 @@ namespace FreeCycle2.Controllers
                 List<Item> itemlist2 = ItemDAO.ItemsByCategory(id2);
                 ViewData["itemlist2"] = itemlist2;
                 ViewBag.a = 3;
+
+                ViewBag.category_name = ItemDAO.GetCategory_Name(id2);
                 return View("Item");
 
             }

@@ -124,9 +124,11 @@ namespace FreeCycle2.Models
 
         public byte[] image { get; set; }
 
+        public string category_name { get; set; }
+
         public Item() { }
 
-        public Item(string first_name, string last_name, string email, int item_id, DateTime create_date, DateTime last_renewed_on, string item_title, string item_detail, int user_id, int category_id, char is_active, byte[] image)
+        public Item(string first_name, string last_name, string email, int item_id, DateTime create_date, DateTime last_renewed_on, string item_title, string item_detail, int user_id, int category_id, char is_active, byte[] image, string category_name)
         {
             this.first_name = first_name;
             this.last_name = last_name;
@@ -140,6 +142,7 @@ namespace FreeCycle2.Models
             this.category_id = category_id;
             this.is_active = is_active;
             this.image = image;
+            this.category_name = category_name;
         }
     }
 

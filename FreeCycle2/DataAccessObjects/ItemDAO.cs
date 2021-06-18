@@ -73,13 +73,15 @@ namespace FreeCycle2.DataAccessObjects
 
         public static List<Item> ItemsByCategory(int id)
         {
+            string category_name = "";
             List<Item> items2 = new List<Item>();
             using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
             {
                 conn.Open();
-                string sql = @"SELECT items.item_id,items.create_date,items.item_title,items.is_active, items.item_detail, images.image
-                                from items 
-                                    inner join images on items.item_id = images.item_id where category_id ='" + id + "'";
+                string sql = @"SELECT items.item_id,items.create_date,items.item_title,items.is_active, items.item_detail, images.image, category.category_name
+                                from ((items 
+                                    inner join images on items.item_id = images.item_id )
+									inner join category on items.category_id = category.category_id) where items.category_id = '" + id + "'";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -92,7 +94,8 @@ namespace FreeCycle2.DataAccessObjects
                         item_title = (string)reader["item_title"],
                         item_detail = (string)reader["item_detail"],
                         is_active = (char)reader["is_active"].ToString()[0],
-                        image = (byte[])reader["image"]
+                        image = (byte[])reader["image"],
+                        category_name = (string)reader["category_name"]
                     };
                     if (i.is_active == '1')
                     {
@@ -104,11 +107,35 @@ namespace FreeCycle2.DataAccessObjects
                     }
 
                 }
+
+                 
+
             }
+            
             return items2;
         }
 
-        public void updateMovie(Item movie)
+        public static String GetCategory_Name(int id)
+        {
+            string category_name = "";
+            using (SqlConnection conn = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true")))
+            {
+                conn.Open();
+                string sql = @"Select category_name from category where category_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    category_name = (string)reader["category_name"];
+
+                }
+            }
+            return category_name;
+        }
+
+
+    public void updateMovie(Item movie)
         {
             //This method accepts updates with, or without, a description
             SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
