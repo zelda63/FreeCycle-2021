@@ -30,11 +30,11 @@ namespace FreeCycle2.Controllers
         }
 
 
-        public ActionResult exchanges(exchanges movies)
+        public ActionResult exchanges(exchanges items)
         {
 
-            movies = exchangesDAO.AllExchanges();
-            return View("exchanges", movies);
+            items = exchangesDAO.AllExchanges();
+            return View("exchanges", items);
 
 
         }
@@ -68,7 +68,7 @@ namespace FreeCycle2.Controllers
 
         }
 
-        public ActionResult AllItems(ViewModel1 f, string Save, string Delete)
+        public ActionResult AllItemsDelete(ViewModel1 f, string Save, string Delete)
         {
       
             CategoryDAO Cdao = new CategoryDAO();
@@ -89,20 +89,20 @@ namespace FreeCycle2.Controllers
             return View(f);
         }
 
-        public ActionResult AddMovie(Category movie, string Save)
+        public ActionResult AddCategory(Category item, string Save)
         {
           
 
             if (Save == "Save")
             {
                 CategoryDAO dAO = new CategoryDAO();
-                dAO.InsertMovie(movie);
+                dAO.InsertCategory(item);
                 ViewBag.Message = "Category Added Successfully.";
             }
-            return View("AddMovie");
+            return View("AddCategory");
         }
 
-        public ActionResult AllMovies(Item movies, HttpPostedFileBase file, bool? IsActive, string email, string Save)
+        public ActionResult AllItems(Item items, HttpPostedFileBase file, bool? IsActive, string email, string Save)
         {
            
             ItemDAO dAO = new ItemDAO();
@@ -119,55 +119,55 @@ namespace FreeCycle2.Controllers
                     {
                         file.InputStream.CopyTo(ms);
                         byte[] array = ms.ToArray();
-                        Item movie = movies.allItems[movies.EditIndex2];
-                        movie.image = array;
+                        Item item = items.allItems[items.EditIndex2];
+                        item.image = array;
                         if (id2 == true)
                         {
-                            movie.is_active = '1';
+                            item.is_active = '1';
 
                         }
                         else
                         {
-                            movie.is_active = '0';
+                            item.is_active = '0';
                         }
                         if (email != null)
                         {
-                            movie.exchanged = '1';
-                            edAO.updateExchange(email, movie);
+                            item.exchanged = '1';
+                            edAO.updateExchange(email, item);
                         }
                         else
                         {
-                            movie.exchanged = '0';
+                            item.exchanged = '0';
                         }
-                        dAO.updateMovie(movie);
-                        movie.IsEditable2 = false;
-                        movies.EditIndex2 = -1;
+                        dAO.updateMovie(item);
+                        item.IsEditable2 = false;
+                        items.EditIndex2 = -1;
                     }
                 }
                 else
                 {
-                    Item movie = movies.allItems[movies.EditIndex2];
+                    Item item = items.allItems[items.EditIndex2];
                     if (id2 == true)
                     {
-                        movie.is_active = '1';
+                        item.is_active = '1';
 
                     }
                     else
                     {
-                        movie.is_active = '0';
+                        item.is_active = '0';
                     }
                     if (email != null)
                     {
-                        movie.exchanged = '1';
-                        edAO.updateExchange(email, movie);
+                        item.exchanged = '1';
+                        edAO.updateExchange(email, item);
                     }
                     else
                     {
-                        movie.exchanged = '0';
+                        item.exchanged = '0';
                     }
-                    dAO.updateMovie(movie);
-                    movie.IsEditable2 = false;
-                    movies.EditIndex2 = -1;
+                    dAO.updateMovie(item);
+                    item.IsEditable2 = false;
+                    items.EditIndex2 = -1;
                 }
 
             }
@@ -175,51 +175,51 @@ namespace FreeCycle2.Controllers
             var groupidvalue = Request.Cookies["group_id"].Value;
             if (groupidvalue == "1")
             {
-                movies = dAO.ItemsForAdmin();
+                items = dAO.ItemsForAdmin();
             }
             else
             {
                 int.TryParse(value, out int result);
-                movies = dAO.ItemsByUser(result);
+                items = dAO.ItemsByUser(result);
             }
-            return View(movies);
+            return View(items);
         }
 
-        public ActionResult EditCategory(Category movies, string Save)
+        public ActionResult EditCategory(Category items, string Save)
         {
             
             CategoryDAO dAO = new CategoryDAO();
             if (Save == "Save")
             {
-                Category movie = movies.allCategories[movies.EditIndex];
-                dAO.updateMovie2(movie);
-                movie.IsEditable = false;
-                movies.EditIndex = -1;
+                Category item = items.allCategories[items.EditIndex];
+                dAO.UpdateCategory(item);
+                item.IsEditable = false;
+                items.EditIndex = -1;
             }
-            movies = dAO.FCategory2();
-            return View(movies);
+            items = dAO.FCategory2();
+            return View(items);
         }
 
-        public ActionResult MoviesEdits(int? id, Category movies)
+        public ActionResult CategoryEdits(int? id, Category categories)
         {
             int id2 = id ?? default(int);
             CategoryDAO dAO = new CategoryDAO();
-            movies = dAO.FCategory2();
-            movies.EditIndex = dAO.setMovieToEditMode2(movies.allCategories, id2);
-            ViewBag.Message = "All movies.";
-            return View("EditCategory", movies);
+            categories = dAO.FCategory2();
+            categories.EditIndex = dAO.setCategoryToEditMode(categories.allCategories, id2);
+            ViewBag.Message = "All items.";
+            return View("EditCategory", categories);
         }
 
-        public ActionResult MoviesDeleted(int? id, Category movies)
+        public ActionResult CategoriesDeleted(int? id, Category categories)
         {
             int id2 = id ?? default(int);
             CategoryDAO dAO = new CategoryDAO();
-            dAO.deleteMovie2(id2);
-            movies = dAO.FCategory2();
-            ViewBag.Message = "All Movies.";
-            return View("EditCategory", movies);
+            dAO.DeleteItems(id2);
+            categories = dAO.FCategory2();
+           
+            return View("EditCategory", categories);
         }
-        public ActionResult MoviesEdit(int? id, Item movies)
+        public ActionResult ItemsEdit(int? id, Item items)
         {
             int id2 = id ?? default(int);
             var value = Request.Cookies["user_id"].Value;
@@ -228,27 +228,27 @@ namespace FreeCycle2.Controllers
             var groupidvalue = Request.Cookies["group_id"].Value;
             if (groupidvalue == "1")
             {
-                movies = dAO.ItemsForAdmin();
+                items = dAO.ItemsForAdmin();
             }
             else
             {
-                movies = dAO.ItemsByUser(result);
+                items = dAO.ItemsByUser(result);
             }
-            movies.EditIndex2 = dAO.setMovieToEditMode(movies.allItems, id2);
-            ViewBag.Message = "All movies.";
-            return View("AllMovies", movies);
+            items.EditIndex2 = dAO.setMovieToEditMode(items.allItems, id2);
+            ViewBag.Message = "All items.";
+            return View("AllItems", items);
         }
 
-        public ActionResult MoviesDelete(int? id, Item movies)
+        public ActionResult ItemsDelete(int? id, Item items)
         {
             int id2 = id ?? default(int);
             var value = Request.Cookies["user_id"].Value;
             int.TryParse(value, out int result);
             ItemDAO dAO = new ItemDAO();
             dAO.deleteMovie(id2);
-            movies = dAO.ItemsByUser(result);
+            items = dAO.ItemsByUser(result);
             ViewBag.Message = "All Movies.";
-            return View("AllMovies", movies);
+            return View("AllItems", items);
         }
 
 

@@ -29,8 +29,8 @@
                 <tr>
                     <td style="border:none">@Html.HiddenFor(m => m.allCategories[i].Category_Id)</td>
                     <td>@Html.DisplayFor(m => m.allCategories[i].Category_name)</td>
-                    <td>@Html.ActionLink("Edit", "MoviesEdits", new { id = Model.allCategories[i].Category_Id })</td>
-                    <td>@Html.ActionLink("Delete", "MoviesDeleted", new { Id = Model.allCategories[i].Category_Id })</td>
+                    <td>@Html.ActionLink("Edit", "CategoryEdits", new { id = Model.allCategories[i].Category_Id })</td>
+                    <td>@Html.ActionLink("Delete", "CategoriesDeleted", new { Id = Model.allCategories[i].Category_Id })</td>
                 </tr>
             }
             else

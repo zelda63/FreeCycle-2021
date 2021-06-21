@@ -1,0 +1,215 @@
+﻿@using FreeCycle2.Models;
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link rel="stylesheet" href="~/Content/Site.css">
+
+</head>
+
+<body >
+
+    @{ if (ViewBag.a == 1)
+
+        {
+            <div class="container-fluid">
+                <div class="vertical-menu">
+
+
+                    <div class="row">
+                       
+                            <div class="col-sm-2" >
+                                <h5>Browse By Categories</h5>
+                                @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                {
+                                    <a class="category-link" href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
+                                }
+                            </div>
+                        <div class="col-sm-1">
+
+                        </div>
+                        <div class="col-sm-9">
+                            @{
+                                var itemCount = 0;
+                                foreach (var product in (List<Item>)ViewData["itemlist"])
+                                {
+
+                                    itemCount++;
+                                }
+
+                                <h4>Showing @itemCount Ads </h4>
+                            }
+                            @foreach (var product in (List<Item>)ViewData["itemlist"])
+                            {
+                                var base64 = Convert.ToBase64String(product.image);
+                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
+
+
+
+                                <a  class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                    <div class="row">
+                                        <div class="col-md-3">  <img src="@img" width="180" height="180" style="position:center" /> </div>
+
+                                        <div class="col-md-9">
+                                            <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                @product.item_title
+                                            </h4>
+                                            <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
+
+                                            <div class="item-description" >@product.item_detail</div>
+
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        }
+
+        else if (ViewBag.a == 3)
+        {
+            <div class="container">
+                <div class="vertical-menu">
+
+
+                    @{ if ((List<Item>)ViewData["itemlist2"] != null)
+                        {
+                            <div class="container">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-2">
+                                                            <h5>Browse By Categories</h5>
+                                                            @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                                            {
+                                                                <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})" class="category-link">@category.Category_name</a>
+                                                            }
+                                                        </div>
+                                                        <div class="col-sm-1"> </div>
+
+                                                        <div class="col-sm-9">
+                                                            @{
+                                                                var itemCount = 0;
+                                                                foreach (var product in (List<Item>)ViewData["itemlist2"])
+                                                                {
+
+                                                                    itemCount++;
+                                                                }
+
+                                                                <h4>Showing @itemCount Ads for category "@ViewBag.category_name" </h4>
+                                                            }
+                                                            @foreach (var product in (List<Item>
+                                                                )ViewData["itemlist2"])
+                                                            {
+                                                                var base64 = Convert.ToBase64String(product.image);
+                                                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                                        <a class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                                            <div class="row">
+                                                                <div class="col-md-3">  <img src="@img" width="180" height="180" style="position:center" /> </div>
+
+                                                                <div class="col-md-9">
+                                                                    <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                                        @product.item_title
+                                                                    </h4>
+                                                                    <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
+
+                                                                    <div class="item-description">@product.item_detail</div>
+
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                        }
+
+                    }
+
+                </div>
+            </div>
+
+        }
+
+        else
+
+        {
+
+            <div class="container">
+                <div class="vertical-menu">
+                    @{ if ((List<Item>)ViewData["searchlist"] != null)
+                        {
+
+
+
+                            <div class="container">
+                                <div class="row">
+                                   
+                                     <div class="col-sm-2" >
+                                <h5>Browse By Categories</h5>
+                                @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                {
+                                    <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})" class="category-link">@category.Category_name</a>
+                                }
+                            </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-9">
+                                        @{
+                                            var itemCount = 0;
+                                            foreach (var product in (List<Item>)ViewData["searchlist"])
+                                            {
+
+                                                itemCount++;
+                                            }
+
+                                            <h4>Showing @itemCount Ads for "@ViewBag.search"</h4>
+                                        }
+                                        @foreach (var product in (List<Item>
+                                            )ViewData["searchlist"])
+                                        {
+                                            var base64 = Convert.ToBase64String(product.image);
+                                            var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                    <a class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                        <div class="row">
+                                            <div class="col-md-3" >  <img src="@img" width="180" height="180" style="position:center" /> </div>
+
+                                            <div class="col-md-9">
+                                                <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                    @product.item_title
+                                                </h4>
+                                                <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
+
+                                                <div class="item-description">@product.item_detail</div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+
+                </div>
+            </div>
+        }
+    }
+</body>
+
+
+</html>
+

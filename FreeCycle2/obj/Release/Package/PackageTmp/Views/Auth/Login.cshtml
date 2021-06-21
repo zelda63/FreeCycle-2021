@@ -1,0 +1,97 @@
+﻿@model FreeCycle2.Models.User
+@{
+    ViewBag.Title = "Login";
+    string errormsg = (string)ViewData["warningPassword"];
+    string errormsg1 = (string)ViewData["warningUsername"];
+}
+
+
+
+<link rel="stylesheet" href="~/Content/Site.css">
+
+
+<div class="container">
+    <br />
+    <div class="row">
+
+
+        <div class="col-lg-12">
+
+            @if (Request.Cookies["first_name"] != null)
+            {
+                var userID = Request.Cookies["user_id"].Value;
+                <center>
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <a class="btn btn-primary" href="@Url.Action("RemoveData","Auth")">Logout</a>
+
+                        </div>
+                    </div>
+                </center>
+
+            }
+            else
+            {
+                using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+                {
+                    <div class="container login-container">
+                        <center>
+
+
+                            <div class="login-div">
+                                <h2>Login</h2>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", @placeholder = " Username", @style = "background-color:whitesmoke" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.ValidationMessageFor(model => model.email, null, new { @style = "color:indianred" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" style="color:indianred;">@errormsg1</div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.PasswordFor(model => model.login_pwd_encry, new { @class = "form-control", @placeholder = " Password", @style = "background-color:whitesmoke" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.ValidationMessageFor(model => model.login_pwd_encry, null, new { @style = "color:indianred" })
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" style="color:indianred;">@errormsg</div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="submit" value="Login" class="btn btn-default login-button" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </center>
+                    </div>
+
+
+                }
+            }
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+
+
+
+

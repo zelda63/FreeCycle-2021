@@ -1,0 +1,36 @@
+@model FreeCycle2.Models.Category
+
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Site.css">
+<h2>Add Category</h2>
+
+@using (Html.BeginForm("AddCategory", "Home", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category_name,
+            htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Category_name,
+                new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.HiddenFor(model => model.max_images_allowed, new { @Value = "5" })
+            @Html.HiddenFor(m => m.post_validity_interval_in_days, new { @Value = "90" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" name="Save" class="btn btn-default" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:green">
+                @ViewBag.Message
+
+            </div>
+        </div>
+    </div>
+
+}

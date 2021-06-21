@@ -1,0 +1,44 @@
+@model FreeCycle2.Models.exchanges
+@{
+    ViewBag.Title = "exchanges";
+}
+
+<link rel="stylesheet" href="~/Content/Site.css">
+
+<h2>Exchanges</h2>
+
+@using (Html.BeginForm("exchanges", "exchanges", FormMethod.Post))
+{
+    var i = 0;
+
+    <style>
+        table, tr, td {
+            border: solid;
+            padding: 10px;
+        }
+    </style>
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.exchange_id)</td>
+            <td>@Html.LabelFor(model => model.item_title)</td>
+            <td>@Html.LabelFor(model => model.email)</td>
+            <td>@Html.LabelFor(model => model.date_txn)</td>
+        </tr>
+        @for (i = 0; i < Model.allexchanges.Count(); i++)
+        {
+
+
+            <tr>
+                <td style="border:none">@Html.DisplayFor(m => m.allexchanges[i].exchange_id)</td>
+                <td>@Html.DisplayFor(m => m.allexchanges[i].item_title)</td>
+                <td>@Html.DisplayFor(m => m.allexchanges[i].email)</td>
+                <td>@Html.DisplayFor(m => m.allexchanges[i].date_txn)</td>
+            </tr>
+
+        }
+    </table>
+
+
+
+
+}

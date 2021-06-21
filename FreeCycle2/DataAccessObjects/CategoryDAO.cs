@@ -71,21 +71,21 @@ namespace FreeCycle2.DataAccessObjects
             }
           
         }
-        public void updateMovie2(Category movie)
+        public void UpdateCategory(Category category)
         {
             //This method accepts updates with, or without, a description
-            SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
+            SqlConnection con = new SqlConnection(("Server=BISIISDEV; Database=FreeCycleDatabase;User Id=bisstudent; Password=bobby2013"));
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
 
             cmd.CommandText = @"UPDATE category SET category_name=@category_name where category_Id=@category_Id";
-            cmd.Parameters.AddWithValue("@category_name", movie.Category_name);
-            cmd.Parameters.AddWithValue("@category_id", movie.Category_Id);
+            cmd.Parameters.AddWithValue("@category_name", category.Category_name);
+            cmd.Parameters.AddWithValue("@category_id", category.Category_Id);
             con.Open();
             cmd.ExecuteNonQuery();
         }
-        public void deleteMovie2(int id)
+        public void DeleteItems(int id)
         {
             SqlConnection con = new SqlConnection(("Server=.; Database=FreeCycleDatabase; Integrated Security=true"));
             SqlCommand cmd = new SqlCommand();
@@ -97,10 +97,10 @@ namespace FreeCycle2.DataAccessObjects
             con.Close();
         }
 
-        public int setMovieToEditMode2(List<Category> movies, int id)
+        public int setCategoryToEditMode(List<Category> items, int id)
         {
             int editIndex = 0;
-            foreach (Category m in movies)
+            foreach (Category m in items)
             {
                 if (m.Category_Id == id)
                 {
@@ -112,15 +112,15 @@ namespace FreeCycle2.DataAccessObjects
             return -1;
         }
 
-        public void InsertMovie(Category movie)
+        public void InsertCategory(Category category)
         {
             SqlConnection con = new SqlConnection(conString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             cmd.CommandText = "INSERT INTO category(category_name, max_images_allowed, post_validity_interval_in_days) VALUES ( @category_name, @max_images_allowed, @post_validity_interval_in_days)";
-            cmd.Parameters.AddWithValue("@category_name", movie.Category_name);
-            cmd.Parameters.AddWithValue("@max_images_allowed", movie.max_images_allowed);
-            cmd.Parameters.AddWithValue("@post_validity_interval_in_days", movie.post_validity_interval_in_days);
+            cmd.Parameters.AddWithValue("@category_name", category.Category_name);
+            cmd.Parameters.AddWithValue("@max_images_allowed", category.max_images_allowed);
+            cmd.Parameters.AddWithValue("@post_validity_interval_in_days", category.post_validity_interval_in_days);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
