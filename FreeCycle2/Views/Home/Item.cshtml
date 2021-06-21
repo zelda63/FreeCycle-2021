@@ -7,6 +7,10 @@
 <head>
 
     <style>
+        body{
+            background-color:ghostwhite;
+        }
+
         .vertical-menu {
             width: 100%;
             height: 100%;
@@ -15,7 +19,7 @@
 
             .vertical-menu a {
                 background-color: #ffff;
-                color: black;
+               
                 display: block;
                 padding: 5px;
                 text-decoration: none;
@@ -30,11 +34,44 @@
                     background-color: #4CAF50;
                     color: white;
                 }
+
+        .col-sm-2 {
+            box-shadow: 0px 0px 8px #888888;
+            background-color: white;
+            margin-top: 40px;
+        }
+
+        h5 {
+            text-align: left;
+            font-weight: bold;
+        }
+        .category-link{
+            color: mediumblue;
+            margin-left: 15px;
+        }
+       
+        .ad-tiles {
+            box-shadow: 0px 0px 8px #888888;
+            margin-bottom: 7px;
+        }
+        .col-md-3 {
+            text-align: left;
+            padding-left: -5px;
+        }
+        .item-post-date {
+            font-size: 12px;
+            color: grey;
+        }
+        .item-description {
+            font-size: 14px;
+            color:black;
+        }
+
     </style>
     
 </head>
 
-<body>
+<body >
 
 
 
@@ -47,13 +84,16 @@
 
                     <div class="row">
                        
-                            <div class="col-sm-2">
-                                <h4 style="text-align:left; font-weight:bold">Categories</h4>
+                            <div class="col-sm-2" >
+                                <h5>Browse By Categories</h5>
                                 @foreach (var category in (List<Category>)ViewData["categorylist"])
                                 {
-                                    <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id })">@category.Category_name</a>
+                                    <a class="category-link" href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
                                 }
                             </div>
+                        <div class="col-sm-1">
+
+                        </div>
                         <div class="col-sm-9">
                             @{
                                 var itemCount = 0;
@@ -72,17 +112,17 @@
 
 
 
-                                <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                <a  class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
                                     <div class="row">
-                                        <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
+                                        <div class="col-md-3">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
                                         <div class="col-md-9">
                                             <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
                                                 @product.item_title
                                             </h4>
-                                            <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
+                                            <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
 
-                                            <div style="font-size: 14px;">@product.item_detail</div>
+                                            <div class="item-description" >@product.item_detail</div>
 
                                         </div>
                                     </div>
@@ -109,55 +149,52 @@
                     @{ if ((List<Item>)ViewData["itemlist2"] != null)
                         {
                             <div class="container">
-                                <div class="row">
-                                  
-                                    <div class="col-sm-2">
-                                          <p style="text-align:left; font-weight:bold">Categories</p>
-                                        @{
+                                                    <div class="row">
 
-                                            foreach (var category in (List<Category>)ViewData["categorylist"])
-                                            {
+                                                        <div class="col-sm-2">
+                                                            <h5>Browse By Categories</h5>
+                                                            @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                                            {
+                                                                <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})" class="category-link">@category.Category_name</a>
+                                                            }
+                                                        </div>
+                                                        <div class="col-sm-1"> </div>
 
-                                                <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
-                                            }
-                                        }
-                                    </div>
+                                                        <div class="col-sm-9">
+                                                            @{
+                                                                var itemCount = 0;
+                                                                foreach (var product in (List<Item>)ViewData["itemlist2"])
+                                                                {
 
-                                    <div class="col-sm-9">
-                                        @{
-                                            var itemCount = 0;
-                                            foreach (var product in (List<Item>)ViewData["itemlist2"])
-                                            {
+                                                                    itemCount++;
+                                                                }
 
-                                                itemCount++;
-                                            }
+                                                                <h4>Showing @itemCount Ads for category "@ViewBag.category_name" </h4>
+                                                            }
+                                                            @foreach (var product in (List<Item>
+                                                                )ViewData["itemlist2"])
+                                                            {
+                                                                var base64 = Convert.ToBase64String(product.image);
+                                                                var img = string.Format("data:Image/jpg;base64,{0}", base64);
+                                                        <a class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                                            <div class="row">
+                                                                <div class="col-md-3">  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
-                                            <h4>Showing @itemCount Ads for category "@ViewBag.category_name" </h4>
-                                        }
-                                        @foreach (var product in (List<Item>
-                                            )ViewData["itemlist2"])
-                                        {
-                                            var base64 = Convert.ToBase64String(product.image);
-                                            var img = string.Format("data:Image/jpg;base64,{0}", base64);
-                                            <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id })">
-                                                <div class="row">
-                                                    <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
+                                                                <div class="col-md-9">
+                                                                    <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                                        @product.item_title
+                                                                    </h4>
+                                                                    <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
 
-                                                    <div class="col-md-9">
-                                                        <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
-                                                            @product.item_title
-                                                        </h4>
-                                                        <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
+                                                                    <div class="item-description">@product.item_detail</div>
 
-                                                        <div style="font-size: 14px;">@product.item_detail</div>
-
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                            }
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                                                    </div>
 
                         }
 
@@ -182,13 +219,14 @@
                             <div class="container">
                                 <div class="row">
                                    
-                                    <div class="col-sm-2">
-                                         <p style="text-align:left; font-weight:bold">Categories</p>
-                                        @foreach (var category in (List<Category>)ViewData["categorylist"])
-                                        {
-                                            <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})">@category.Category_name</a>
-                                        }
-                                    </div>
+                                     <div class="col-sm-2" >
+                                <h5>Browse By Categories</h5>
+                                @foreach (var category in (List<Category>)ViewData["categorylist"])
+                                {
+                                    <a href="@Url.Action("Item", "Home", new { categoryID = category.Category_Id})" class="category-link">@category.Category_name</a>
+                                }
+                            </div>
+                                    <div class="col-sm-1"></div>
                                     <div class="col-sm-9">
                                         @{
                                             var itemCount = 0;
@@ -205,21 +243,21 @@
                                         {
                                             var base64 = Convert.ToBase64String(product.image);
                                             var img = string.Format("data:Image/jpg;base64,{0}", base64);
-                                            <a style="box-shadow: 0px 0px 8px #888888; margin-bottom:7px;" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
-                                                <div class="row">
-                                                    <div class="col-md-3" style="text-align:left;  padding-left:-5px;">  <img src="@img" width="180" height="180" style="position:center" /> </div>
+                                    <a class="ad-tiles" href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})">
+                                        <div class="row">
+                                            <div class="col-md-3" >  <img src="@img" width="180" height="180" style="position:center" /> </div>
 
-                                                    <div class="col-md-9">
-                                                        <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
-                                                            @product.item_title
-                                                        </h4>
-                                                        <div style="font-size: 12px; color:grey; "><h6>Posted on: @product.create_date</h6></div>
+                                            <div class="col-md-9">
+                                                <h4 href="@Url.Action("ItemDetails", "ItemDetails", new { item_id = product.item_id})" style="color:darkblue; font-size:medium;">
+                                                    @product.item_title
+                                                </h4>
+                                                <div class="item-post-date"><h6>Posted on: @product.create_date</h6></div>
 
-                                                        <div style="font-size: 14px;">@product.item_detail</div>
+                                                <div class="item-description">@product.item_detail</div>
 
-                                                    </div>
-                                                </div>
-                                            </a>
+                                            </div>
+                                        </div>
+                                    </a>
                                         }
                                     </div>
                                 </div>

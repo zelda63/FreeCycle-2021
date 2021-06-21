@@ -3,6 +3,20 @@
     ViewBag.Title = "Post";
 }
 
+<style>
+    body {
+        background-color: ghostwhite;
+    }
+    .add-item {
+        background-color: #189db3;
+        color: white;
+    }
+    .choose-pic{
+        margin-left:100px;
+    }
+</style>
+
+
 @if (Request.Cookies["first_name"] != null)
 {
     var userID = Request.Cookies["user_id"].Value;
@@ -12,10 +26,8 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
-            <h4>Add Item</h4>
-            <div>
-                @Html.ActionLink("Back to List", "Item")
-            </div>
+            
+            
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -52,14 +64,14 @@
             @Html.HiddenFor(model => model.last_renewed_on, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
 
             <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-md-10 choose-pic">
                     <input asp-for="Picture" type="file" name="file" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" name="Save" class="btn btn-default" />
+                    <input type="submit" value="Add Item" name="Save" class="btn btn-default add-item" />
                 </div>
             </div>
             <div class="form-group">

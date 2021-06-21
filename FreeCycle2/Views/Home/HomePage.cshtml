@@ -4,6 +4,30 @@
     ViewBag.Title = "HomePage";
 
 }
+
+<style>
+        body{
+            background-color:ghostwhite;
+        }
+    .col-xs-3 {
+        background-color: ghostwhite;
+        text-align: center;
+        font-size: medium;
+    }
+        .thumbnail{
+            background-color:ghostwhite;
+        }
+
+    .slanted {
+        font-size: 40px;
+        text-transform: uppercase;
+        transform: rotate(-5deg) skew(-5deg);
+        background-color: #ffc;
+    }
+        
+
+</style>
+
 <h1> Categories</h1>
 
 
@@ -14,21 +38,11 @@
     if (i >= 4)
     {
         @Html.HiddenFor(m => m.EditIndex)
-        <style>
-
-
-            .slanted {
-                font-size: 40px;
-                text-transform: uppercase;
-                transform: rotate(-5deg) skew(-5deg);
-                background-color: #ffc;
-            }
-        </style>
-
+     
         @:<div class="container">
               <div class="row">
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/Home/Item?categoryID=1" class="thumbnail">
                           <img src="~/Images/office_furniture_img.jfif" alt="Office Supplies" />
                       </a>
@@ -38,7 +52,7 @@
                           </a>
                   </div>
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/Home/Item?categoryID=2" class="thumbnail">
                           <img src="~/Images/office_supplies_img.jfif" alt="Office Supplies" />
                       </a>
@@ -48,7 +62,7 @@
                       </a>
                   </div>
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3">
                       <a href="/Home/Item?categoryID=3" class="thumbnail">
                           <img src="~/Images/tech_equipment_img.jpg" alt="Office Supplies" />
                       </a>
@@ -59,7 +73,7 @@
                   </div>
 
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/Home/Item?categoryID=4" class="thumbnail">
                           <img src="~/Images/other_img.jfif" alt="Office Supplies" />
                       </a>
@@ -82,11 +96,7 @@
 
 <h1>Latest Ads</h1>
 @using (Html.BeginForm("AllItems", "Home", FormMethod.Post))
-
-
 {
-
-
     var i = Model.ItemsModel.Items.Count();
     if (i >= 4)
     {
@@ -95,7 +105,7 @@
         @:<div class="container">
               <div class="row">
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
 
 
                       <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 1].Item_Id ; return false" class="thumbnail">
@@ -109,7 +119,7 @@
                                   }
                               }
                           }
-                          <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad1_img_index].Image_Data))" style="border:thin; border-color:lightgray;">
+                          <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Images.Items[ad1_img_index].Image_Data))" >
                           
 
                       </a>
@@ -120,7 +130,7 @@
 
                   </div>
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 2].Item_Id ; return false" class="thumbnail">
                           @{ int ad2_id = Model.ItemsModel.Items[i - 2].Item_Id;
                               int ad2_img_index = 0;
@@ -143,7 +153,7 @@
 
                   </div>
 
-                  <div class="col-xs-3" style="text-align:center ; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 3].Item_Id ; return false" class="thumbnail">
                           @{ int ad3_id = Model.ItemsModel.Items[i - 3].Item_Id;
                               int ad3_img_index = 0;
@@ -166,7 +176,7 @@
                   </div>
 
 
-                  <div class="col-xs-3" style="text-align:center; font-size:medium; ">
+                  <div class="col-xs-3" >
                       <a href="/ItemDetails/ItemDetails/" onclick="location.href = this.href + '?item_id='+@Model.ItemsModel.Items[i - 4].Item_Id ; return false" class="thumbnail">
                           @{ int ad4_id = Model.ItemsModel.Items[i - 4].Item_Id;
                               int ad4_img_index = 0;

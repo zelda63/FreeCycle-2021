@@ -255,7 +255,7 @@ namespace FreeCycle2.Controllers
         public ActionResult Post(int? user_id, int? category_id, char? is_active, char? exchanged, DateTime? create_date, DateTime? last_renewed_on, string item_title, string item_detail, HttpPostedFileBase file, string Save)
         {
 
-            ViewBag.Message = "Add an Item Page.";
+            
             int id22 = user_id ?? default(int);
             int id23 = category_id ?? default(int);
             char id24 = is_active ?? default(char);
@@ -263,7 +263,7 @@ namespace FreeCycle2.Controllers
             DateTime id25 = create_date ?? default(DateTime);
             DateTime id26 = last_renewed_on ?? default(DateTime);
 
-            if (Save == "Save")
+            if (Save == "Add Item")
             {
                 ItemDAO dAO = new ItemDAO();
                 if (file != null)
