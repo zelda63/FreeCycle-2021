@@ -278,6 +278,7 @@
     <Content Include="Views\Home\exchanges.cshtml" />
     <Content Include="Views\Home\AllMovies.cshtml" />
     <Content Include="Views\Home\AdminPage.cshtml" />
+    <Content Include="Views\Home\AddMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

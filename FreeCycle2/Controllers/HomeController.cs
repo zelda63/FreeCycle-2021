@@ -24,7 +24,7 @@ namespace FreeCycle2.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+           
 
             return View();
         }
@@ -70,7 +70,7 @@ namespace FreeCycle2.Controllers
 
         public ActionResult AllItems(ViewModel1 f, string Save, string Delete)
         {
-            ViewBag.Message = "All Items.";
+      
             CategoryDAO Cdao = new CategoryDAO();
 
             f.Images = Cdao.getImages();
@@ -91,7 +91,7 @@ namespace FreeCycle2.Controllers
 
         public ActionResult AddMovie(Category movie, string Save)
         {
-            ViewBag.Message = "Add a Category Page.";
+          
 
             if (Save == "Save")
             {
@@ -104,7 +104,7 @@ namespace FreeCycle2.Controllers
 
         public ActionResult AllMovies(Item movies, HttpPostedFileBase file, bool? IsActive, string email, string Save)
         {
-            ViewBag.Message = "All Movies.";
+           
             ItemDAO dAO = new ItemDAO();
             exchangesDAO edAO = new exchangesDAO();
             bool id2 = IsActive ?? default(bool);
@@ -187,7 +187,7 @@ namespace FreeCycle2.Controllers
 
         public ActionResult EditCategory(Category movies, string Save)
         {
-            ViewBag.Message = "All Movies.";
+            
             CategoryDAO dAO = new CategoryDAO();
             if (Save == "Save")
             {
