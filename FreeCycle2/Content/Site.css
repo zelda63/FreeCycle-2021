@@ -31,3 +31,176 @@ textarea {
     border: solid;
     background-color: black;
 }
+
+body {
+    background-color: ghostwhite;
+}
+
+.col-xs-3 {
+    background-color: ghostwhite;
+    text-align: center;
+    font-size: medium;
+}
+
+.thumbnail {
+    background-color: ghostwhite;
+}
+
+.slanted {
+    font-size: 40px;
+    text-transform: uppercase;
+    transform: rotate(-5deg) skew(-5deg);
+    background-color: #ffc;
+}
+
+.vertical-menu {
+    width: 100%;
+    height: 100%;
+}
+
+    .vertical-menu a {
+        background-color: #ffff;
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+    }
+
+        .vertical-menu a:hover {
+            text-decoration: underline;
+        }
+
+        .vertical-menu a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+.col-sm-2 {
+    box-shadow: 0px 0px 8px #888888;
+    background-color: white;
+    margin-top: 40px;
+}
+
+h5 {
+    text-align: left;
+    font-weight: bold;
+}
+
+.category-link {
+    color: mediumblue;
+    margin-left: 15px;
+}
+
+.ad-tiles {
+    box-shadow: 0px 0px 8px #888888;
+    margin-bottom: 7px;
+}
+
+.col-md-3 {
+    text-align: left;
+    padding-left: -5px;
+}
+
+.item-post-date {
+    font-size: 12px;
+    color: grey;
+}
+
+.item-description {
+    font-size: 14px;
+    color: black;
+}
+
+
+.login-button {
+    width: 80px;
+    background-color: #189db3;
+    color: white;
+}
+
+.login-div {
+    background-color: white;
+    padding: 50px;
+    padding-top: 10px;
+    box-shadow: 0px 0px 8px #888888;
+}
+
+.login-container {
+    height: 200px;
+    width: 500px;
+}
+
+.div1 {
+    box-shadow: 0px 0px 8px #888888;
+}
+
+h1 {
+    text-align: left;
+    font-size: xx-large;
+    color: black;
+    font-weight: 100;
+}
+
+.div3 {
+    background-color: #E0E0E0;
+    padding: 5px;
+    box-shadow: 0px 0px 5px #888888;
+}
+
+.contact-info {
+    font-size: larger;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.name-div {
+    font-size: large;
+}
+
+.email-div {
+    font-size: medium;
+    color: grey;
+}
+
+.not-loggedin {
+    font-size: medium;
+}
+
+.item-detail {
+    font-size: large;
+    text-align: left;
+}
+
+.create-date {
+    text-align: left;
+    font-size: small;
+    color: grey;
+}
+
+.item-details-img {
+    border: solid;
+}
+
+.div4 {
+    height: 400px;
+}
+
+.recycle-logo {
+    text-align: center;
+}
+
+.blue-button {
+    background-color: #189db3;
+    color: white;
+}
+.add-item {
+    background-color: #189db3;
+    color: white;
+}
+
+.choose-pic {
+    margin-left: 100px;
+}
+table, tr, td {
+    border: solid;
+    padding: 10px;
+}

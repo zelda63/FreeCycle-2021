@@ -4,23 +4,16 @@
     ViewBag.Title = "myitem";
 }
 
-<style>
-    body {
-        background-color: ghostwhite;
-    }
-    table, tr, td {
-        border: solid;
-        padding: 10px;
-    }
-</style>
 
+
+<link rel="stylesheet" href="~/Content/Site.css">
 
 
 @using (Html.BeginForm("AllMovies", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     var i = 0;
     @Html.HiddenFor(m => m.EditIndex2)
- 
+
     <table>
         @for (i = 0; i < Model.allItems.Count(); i++)
         {
