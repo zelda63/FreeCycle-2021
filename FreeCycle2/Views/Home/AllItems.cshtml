@@ -24,7 +24,7 @@
 
                 <tr>
 
-                    <td style="border:none">@Html.HiddenFor(m => m.allItems[i].item_id)</td>
+                    @Html.HiddenFor(m => m.allItems[i].item_id)
                     <td>
                         @if (Html.DisplayFor(m => m.allItems[i].is_active).ToString() == "1")
                         {
@@ -47,46 +47,59 @@
             else
             {
 
-                <tr>
+    <tr>
 
-                    <td>@Html.HiddenFor(m => m.allItems[i].item_id)</td>
-                    <td>@Html.TextBoxFor(m => m.allItems[i].item_title)</td>
-                    <td>
+        @Html.HiddenFor(m => m.allItems[i].item_id)
+        <td>
+            @if (Html.DisplayFor(m => m.allItems[i].is_active).ToString() == "1")
+            {
 
-                        @Html.TextBoxFor(m => m.allItems[i].item_detail)
-                    </td>
-                    <td><input asp-for="Picture" type="file" name="file" /></td>
+                <p>Not Reserved</p>
 
+            }
+            else
+            {
+                <p>Reserved</p>
+            }
+        </td>
+        <td>@Html.TextBoxFor(m => m.allItems[i].item_title)</td>
+        <td>
 
-                    @if (Html.DisplayFor(m => m.allItems[i].is_active).ToString() == "1")
-                    {
-                        <td>
-                            <input checked="checked"
-                                   id="IsActive"
-                                   name="IsActive"
-                                   type="checkbox"
-                                   value="true" />
-                        </td>
-
-                    }
-                    else
-                    {
-                        <td>
-                            <input id="IsActive"
-                                   name="IsActive"
-                                   type="checkbox"
-                                   value="true" />
-                        </td>
-
-                        <td> @Html.TextBox("email")</td>
-                    }
+            @Html.TextBoxFor(m => m.allItems[i].item_detail)
+        </td>
+        <td><input asp-for="Picture" type="file" name="file" /></td>
 
 
+        @if (Html.DisplayFor(m => m.allItems[i].is_active).ToString() == "1")
+        {
+            <td><h6>Checked means "Not Reserved"</h6>
+                <input checked="checked"
+                       id="IsActive"
+                       name="IsActive"
+                       type="checkbox"
+                       value="true" />
+            </td>
 
-                    <td> <input type="submit" value="Save" name="Save" class="btn btn-link" /></td>
-                    <td> <input type="submit" value="Cancel" name="Cancel" class="btn btn-link" /></td>
+        }
+        else
+        {
+            <td><h6>UnChecked means "Reserved"</h6>
+                <input id="IsActive"
+                       name="IsActive"
+                       type="checkbox"
+                       value="true" />
+            </td>
 
-                </tr>
+            <td><h6>if item is sold, Enter the buyer's email here</h6>
+        @Html.TextBox("email")</td>
+        }
+
+
+
+        <td> <input type="submit" value="Save" name="Save" class="btn btn-link" /></td>
+        <td> <input type="submit" value="Cancel" name="Cancel" class="btn btn-link" /></td>
+
+    </tr>
 
 
 
