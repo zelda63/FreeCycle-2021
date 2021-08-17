@@ -16,5 +16,5 @@ https://bistest.saskpolytech.ca/FreeCycle/
 * Project Management
 * Project Development process
 * Project Documentation 
-* Woring with source and version control
+* Working with source and version control
 * Advanced concepts in technologies used:  ASP.Net, HTML, CSS, MVC Framework, SQL
